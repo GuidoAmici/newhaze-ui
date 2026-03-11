@@ -38,12 +38,11 @@ export interface HeaderProps {
   profileHref?: string
   /** Pass Next.js Link or React Router Link for client-side navigation. Defaults to <a>. */
   LinkComponent?: React.ComponentType<LinkProps>
+  /** Base URL for the main website. Defaults to https://newhaze.ar */
+  websiteUrl?: string
+  /** Base URL for the learn app. Defaults to https://learn.newhaze.ar */
+  learnUrl?: string
 }
-
-const NAV_LINKS: { label: string; href: string; app: string }[] = [
-  { label: 'Aprender', href: 'https://learn.newhaze.ar', app: 'learn' },
-  { label: 'Blog',     href: 'https://newhaze.ar/blog',  app: 'blog' },
-]
 
 const ROLE_LINKS: { label: string; href: string; roles: string[] }[] = [
   {
@@ -196,9 +195,16 @@ export function Header({
   onLogout,
   profileHref,
   LinkComponent = DefaultLink,
+  websiteUrl = 'https://newhaze.ar',
+  learnUrl = 'https://learn.newhaze.ar',
 }: HeaderProps) {
   const { theme } = useTheme()
   const isMobile = useIsMobile()
+
+  const navLinks = [
+    { label: 'Aprender', href: learnUrl,          app: 'learn' },
+    { label: 'Blog',     href: `${websiteUrl}/blog`, app: 'blog'  },
+  ]
 
   const navLinkStyle = (isActive: boolean): React.CSSProperties => ({
     fontSize: 13,
@@ -225,7 +231,7 @@ export function Header({
     }}>
 
       {/* Logo */}
-      <LinkComponent href="https://newhaze.ar" aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
+      <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
         <span style={{ fontSize: 20 }}>🌿</span>
         <span style={{ fontSize: 16, fontWeight: 600, color: theme.accentBright }}>New Haze</span>
       </LinkComponent>
@@ -233,7 +239,7 @@ export function Header({
       {/* Nav — hidden on mobile */}
       {!isMobile && (
         <nav style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
-          {NAV_LINKS.map(link => (
+          {navLinks.map(link => (
             <LinkComponent key={link.app} href={link.href} style={navLinkStyle(activeApp === link.app)}>
               {link.label}
             </LinkComponent>
