@@ -34,6 +34,8 @@ export interface HeaderProps {
   user?: NavUser | null
   onLogin?: () => void
   onLogout?: () => void
+  /** Route for the profile/settings page (e.g. "/perfil"). Adds a link in the UserMenu dropdown. */
+  profileHref?: string
   /** Pass Next.js Link or React Router Link for client-side navigation. Defaults to <a>. */
   LinkComponent?: React.ComponentType<LinkProps>
 }
@@ -67,9 +69,11 @@ function DefaultLink({ href, children, style, 'aria-label': ariaLabel }: LinkPro
 interface UserMenuProps {
   user: NavUser
   onLogout?: () => void
+  profileHref?: string
+  LinkComponent: React.ComponentType<LinkProps>
 }
 
-function UserMenu({ user, onLogout }: UserMenuProps) {
+function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps) {
   const { theme } = useTheme()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -127,8 +131,29 @@ function UserMenu({ user, onLogout }: UserMenuProps) {
             </div>
           </div>
 
+          {/* Profile link */}
+          {profileHref && (
+            <div style={{ padding: '4px 8px 0' }}>
+              <LinkComponent
+                href={profileHref}
+                style={{
+                  display: 'block',
+                  padding: '8px 10px',
+                  borderRadius: 8,
+                  fontSize: 13,
+                  color: theme.textMuted,
+                  textDecoration: 'none',
+                  fontFamily: 'inherit',
+                  transition: 'background 0.1s, color 0.1s',
+                }}
+              >
+                Mi perfil
+              </LinkComponent>
+            </div>
+          )}
+
           {/* Logout */}
-          <div style={{ padding: '8px 8px 4px' }}>
+          <div style={{ padding: '4px 8px 4px' }}>
             <button
               onClick={() => { setOpen(false); onLogout?.() }}
               style={{
@@ -169,6 +194,7 @@ export function Header({
   user,
   onLogin,
   onLogout,
+  profileHref,
   LinkComponent = DefaultLink,
 }: HeaderProps) {
   const { theme } = useTheme()
@@ -226,7 +252,7 @@ export function Header({
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
         <ThemePicker />
         {user ? (
-          <UserMenu user={user} onLogout={onLogout} />
+          <UserMenu user={user} onLogout={onLogout} profileHref={profileHref} LinkComponent={LinkComponent} />
         ) : (
           <button
             onClick={onLogin}
