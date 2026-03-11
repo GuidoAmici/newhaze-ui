@@ -1,3 +1,5 @@
+"use client"
+
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import themes, { ThemeColors, ThemeName } from './themes'
 

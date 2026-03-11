@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../ThemeProvider'
 import { ThemeName } from '../themes'
