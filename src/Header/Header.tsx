@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTheme } from '../ThemeProvider'
 import { ThemePicker } from './ThemePicker'
+
+function useIsMobile(breakpoint = 768): boolean {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
+  )
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [breakpoint])
+  return isMobile
+}
 
 export interface NavUser {
   username: string
@@ -55,6 +69,7 @@ export function Header({
   LinkComponent = DefaultLink,
 }: HeaderProps) {
   const { theme } = useTheme()
+  const isMobile = useIsMobile()
 
   const navLinkStyle = (isActive: boolean): React.CSSProperties => ({
     fontSize: 13,
@@ -68,7 +83,7 @@ export function Header({
   return (
     <header style={{
       borderBottom: `1px solid ${theme.border}`,
-      padding: '0 32px',
+      padding: isMobile ? '0 16px' : '0 32px',
       display: 'flex',
       alignItems: 'center',
       gap: 24,
@@ -86,21 +101,23 @@ export function Header({
         <span style={{ fontSize: 16, fontWeight: 600, color: theme.accentBright }}>New Haze</span>
       </LinkComponent>
 
-      {/* Nav */}
-      <nav style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
-        {NAV_LINKS.map(link => (
-          <LinkComponent key={link.app} href={link.href} style={navLinkStyle(activeApp === link.app)}>
-            {link.label}
-          </LinkComponent>
-        ))}
-        {user && ROLE_LINKS.map(link =>
-          hasAnyRole(user.roles, link.roles) ? (
-            <LinkComponent key={link.label} href={link.href} style={navLinkStyle(false)}>
+      {/* Nav — hidden on mobile */}
+      {!isMobile && (
+        <nav style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+          {NAV_LINKS.map(link => (
+            <LinkComponent key={link.app} href={link.href} style={navLinkStyle(activeApp === link.app)}>
               {link.label}
             </LinkComponent>
-          ) : null
-        )}
-      </nav>
+          ))}
+          {user && ROLE_LINKS.map(link =>
+            hasAnyRole(user.roles, link.roles) ? (
+              <LinkComponent key={link.label} href={link.href} style={navLinkStyle(false)}>
+                {link.label}
+              </LinkComponent>
+            ) : null
+          )}
+        </nav>
+      )}
 
       {/* Right controls */}
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>

@@ -13,8 +13,21 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-function applyThemeVars(colors: ThemeColors) {
+// CSS classes applied to <html> — matches the website's next-themes class mapping
+const HTML_CLASSES: Record<ThemeName, string[]> = {
+  'neon-purple':    ['dark'],
+  'green-botanical': ['dark', 'green-botanical'],
+  'light-legacy':   ['light-legacy'],
+}
+const COLOR_SCHEME: Record<ThemeName, string> = {
+  'neon-purple':    'dark',
+  'green-botanical': 'dark',
+  'light-legacy':   'light',
+}
+
+function applyTheme(name: ThemeName, colors: ThemeColors) {
   const root = document.documentElement
+  // CSS variables
   root.style.setProperty('--nh-bg',            colors.bg)
   root.style.setProperty('--nh-bg-card',       colors.bgCard)
   root.style.setProperty('--nh-bg-card-light', colors.bgCardLight)
@@ -28,6 +41,10 @@ function applyThemeVars(colors: ThemeColors) {
   root.style.setProperty('--nh-accent-neon',   colors.accentNeon)
   root.style.setProperty('--nh-cta',           colors.cta)
   root.style.setProperty('--nh-cta-light',     colors.ctaLight)
+  // CSS classes (for Tailwind dark: variant + website globals.css)
+  root.classList.remove('dark', 'green-botanical', 'light-legacy')
+  HTML_CLASSES[name].forEach(c => root.classList.add(c))
+  root.style.colorScheme = COLOR_SCHEME[name]
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -43,8 +60,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const theme = useMemo(() => themes[themeName].colors, [themeName])
 
   useEffect(() => {
-    applyThemeVars(theme)
-  }, [theme])
+    applyTheme(themeName, theme)
+  }, [themeName, theme])
 
   const setThemeName = (name: ThemeName) => {
     if (!(name in themes)) return
