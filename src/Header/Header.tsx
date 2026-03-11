@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../ThemeProvider'
 import { ThemePicker } from './ThemePicker'
 
@@ -20,6 +20,7 @@ function useIsMobile(breakpoint = 768): boolean {
 
 export interface NavUser {
   username: string
+  email: string
   roles: string[]
 }
 
@@ -61,6 +62,106 @@ function hasAnyRole(userRoles: string[], required: string[]): boolean {
 
 function DefaultLink({ href, children, style, 'aria-label': ariaLabel }: LinkProps) {
   return <a href={href} style={style} aria-label={ariaLabel}>{children}</a>
+}
+
+interface UserMenuProps {
+  user: NavUser
+  onLogout?: () => void
+}
+
+function UserMenu({ user, onLogout }: UserMenuProps) {
+  const { theme } = useTheme()
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [open])
+
+  return (
+    <div ref={ref} style={{ position: 'relative' }}>
+      <button
+        onClick={() => setOpen(v => !v)}
+        style={{
+          background: 'none',
+          border: `1px solid ${theme.border}`,
+          borderRadius: 8,
+          padding: '4px 10px',
+          color: theme.accentBright,
+          cursor: 'pointer',
+          fontSize: 12,
+          fontFamily: 'inherit',
+          fontWeight: 600,
+          transition: 'border-color 0.15s',
+        }}
+      >
+        {user.username}
+        <span style={{ marginLeft: 4, fontSize: 9, opacity: 0.7 }}>{open ? '▲' : '▼'}</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute',
+          top: 'calc(100% + 8px)',
+          right: 0,
+          minWidth: 200,
+          background: theme.bgCard,
+          border: `1px solid ${theme.border}`,
+          borderRadius: 12,
+          padding: '8px 0',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+          zIndex: 200,
+        }}>
+          {/* User info */}
+          <div style={{ padding: '10px 16px 12px', borderBottom: `1px solid ${theme.border}` }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: theme.text }}>{user.username}</div>
+            <div style={{ fontSize: 11, color: theme.textDim, marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {user.email}
+            </div>
+          </div>
+
+          {/* Logout */}
+          <div style={{ padding: '8px 8px 4px' }}>
+            <button
+              onClick={() => { setOpen(false); onLogout?.() }}
+              style={{
+                width: '100%',
+                textAlign: 'left',
+                background: 'none',
+                border: 'none',
+                padding: '8px 10px',
+                borderRadius: 8,
+                color: theme.textMuted,
+                cursor: 'pointer',
+                fontSize: 13,
+                fontFamily: 'inherit',
+                transition: 'background 0.1s, color 0.1s',
+              }}
+              onMouseEnter={e => {
+                const btn = e.currentTarget as HTMLButtonElement
+                btn.style.background = theme.bgCardLight
+                btn.style.color = theme.text
+              }}
+              onMouseLeave={e => {
+                const btn = e.currentTarget as HTMLButtonElement
+                btn.style.background = 'none'
+                btn.style.color = theme.textMuted
+              }}
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function Header({
@@ -125,26 +226,19 @@ export function Header({
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
         <ThemePicker />
         {user ? (
-          <>
-            <span style={{ fontSize: 12, color: theme.textMuted }}>{user.username}</span>
-            <button
-              onClick={onLogout}
-              style={{
-                background: 'none', border: `1px solid ${theme.border}`, borderRadius: 8,
-                padding: '4px 10px', color: theme.textDim, cursor: 'pointer',
-                fontSize: 11, fontFamily: 'inherit',
-              }}
-            >
-              Salir
-            </button>
-          </>
+          <UserMenu user={user} onLogout={onLogout} />
         ) : (
           <button
             onClick={onLogin}
             style={{
-              background: 'none', border: `1px solid ${theme.border}`, borderRadius: 8,
-              padding: '4px 10px', color: theme.accentBright, cursor: 'pointer',
-              fontSize: 11, fontFamily: 'inherit',
+              background: 'none',
+              border: `1px solid ${theme.border}`,
+              borderRadius: 8,
+              padding: '4px 10px',
+              color: theme.accentBright,
+              cursor: 'pointer',
+              fontSize: 11,
+              fontFamily: 'inherit',
             }}
           >
             Iniciar sesión
