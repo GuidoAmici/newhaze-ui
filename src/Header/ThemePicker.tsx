@@ -8,6 +8,8 @@ const THEME_ICONS: Record<ThemeName, string> = {
   'neon-purple':    '🟣',
   'green-botanical': '🌿',
   'light-legacy':   '☀️',
+  'neon-purple-v2': '💜',
+  'dark-orange':    '🟠',
 }
 
 export function ThemePicker() {

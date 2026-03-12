@@ -20,7 +20,7 @@ export interface Theme {
   colors: ThemeColors
 }
 
-export type ThemeName = 'neon-purple' | 'green-botanical' | 'light-legacy'
+export type ThemeName = 'neon-purple' | 'green-botanical' | 'light-legacy' | 'neon-purple-v2' | 'dark-orange'
 
 const themes: Record<ThemeName, Theme> = {
   'neon-purple': {
@@ -78,6 +78,44 @@ const themes: Record<ThemeName, Theme> = {
       accentNeon:   '#a78bfa',
       cta:          '#f97316',
       ctaLight:     '#fb923c',
+    },
+  },
+  'neon-purple-v2': {
+    label: 'Neón Púrpura v2',
+    colors: {
+      bg:           '#0b0810',
+      bgCard:       '#120d1a',
+      bgCardLight:  '#1a1228',
+      foreground:   '#d4b8f0',
+      text:         '#d4b8f0',
+      textMuted:    '#9a7abf',
+      textDim:      '#5a4078',
+      border:       '#2d1f48',
+      borderLight:  '#3d2a60',
+      accent:       '#7b4cb8',
+      accentBright: '#a678e8',
+      accentNeon:   '#4ec9c4',
+      cta:          '#e8198a',
+      ctaLight:     '#f48fb0',
+    },
+  },
+  'dark-orange': {
+    label: 'Naranja Oscuro',
+    colors: {
+      bg:           '#080810',
+      bgCard:       '#0e0e1c',
+      bgCardLight:  '#161628',
+      foreground:   '#f5f0e0',
+      text:         '#f5f0e0',
+      textMuted:    '#b8a888',
+      textDim:      '#6a5a40',
+      border:       '#1e1e38',
+      borderLight:  '#2e2e50',
+      accent:       '#ff6b00',
+      accentBright: '#ff9a3c',
+      accentNeon:   '#ccff00',
+      cta:          '#ffb300',
+      ctaLight:     '#ffd54f',
     },
   },
 }

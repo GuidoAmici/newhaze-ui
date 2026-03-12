@@ -20,11 +20,15 @@ const HTML_CLASSES: Record<ThemeName, string[]> = {
   'neon-purple':    ['dark'],
   'green-botanical': ['dark', 'green-botanical'],
   'light-legacy':   ['light-legacy'],
+  'neon-purple-v2': ['dark', 'neon-purple-v2'],
+  'dark-orange':    ['dark', 'dark-orange'],
 }
 const COLOR_SCHEME: Record<ThemeName, string> = {
   'neon-purple':    'dark',
   'green-botanical': 'dark',
   'light-legacy':   'light',
+  'neon-purple-v2': 'dark',
+  'dark-orange':    'dark',
 }
 
 function applyTheme(name: ThemeName, colors: ThemeColors) {
