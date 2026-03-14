@@ -31,7 +31,7 @@ export function AuthModal({ onClose, initialMode, authScreenProps }: AuthModalPr
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          background: theme.bgCard,
+          background: theme.bg,
           border: `1px solid ${theme.border}`,
           borderRadius: 24,
           padding: 32,

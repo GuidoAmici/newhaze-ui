@@ -1,8 +1,7 @@
 export interface ThemeColors {
+  bgDark: string
   bg: string
-  bgCard: string
-  bgCardLight: string
-  foreground: string
+  bgLight: string
   text: string
   textMuted: string
   textDim: string
@@ -26,10 +25,9 @@ const themes: Record<ThemeName, Theme> = {
   'neon-purple': {
     label: 'Neón Púrpura',
     colors: {
-      bg:           '#0b0810',
-      bgCard:       '#120d1a',
-      bgCardLight:  '#1a1228',
-      foreground:   '#e8d4f8',
+      bgDark:       '#0b0810',
+      bg:           '#120d1a',
+      bgLight:      '#1a1228',
       text:         '#e8d4f8',
       textMuted:    '#9a7abf',
       textDim:      '#5a4078',
@@ -45,10 +43,9 @@ const themes: Record<ThemeName, Theme> = {
   'green-botanical': {
     label: 'Verde Botánico',
     colors: {
-      bg:           '#0a1a0e',
-      bgCard:       '#0f2515',
-      bgCardLight:  '#15301d',
-      foreground:   '#e8f5e9',
+      bgDark:       '#0a1a0e',
+      bg:           '#0f2515',
+      bgLight:      '#15301d',
       text:         '#e8f5e9',
       textMuted:    '#a5d6a7',
       textDim:      '#6b9a6e',
@@ -64,10 +61,9 @@ const themes: Record<ThemeName, Theme> = {
   'light-legacy': {
     label: 'Clásico Claro',
     colors: {
-      bg:           '#ffffff',
-      bgCard:       '#f8f9fa',
-      bgCardLight:  '#f0f2f5',
-      foreground:   '#1a1a2e',
+      bgDark:       '#e8eaed',
+      bg:           '#f8f9fa',
+      bgLight:      '#ffffff',
       text:         '#1a1a2e',
       textMuted:    '#6b7280',
       textDim:      '#9ca3af',
@@ -83,10 +79,9 @@ const themes: Record<ThemeName, Theme> = {
   'neon-purple-v2': {
     label: 'Neón Púrpura v2',
     colors: {
-      bg:           '#0b0810',
-      bgCard:       '#120d1a',
-      bgCardLight:  '#1a1228',
-      foreground:   '#d4b8f0',
+      bgDark:       '#0b0810',
+      bg:           '#120d1a',
+      bgLight:      '#1a1228',
       text:         '#d4b8f0',
       textMuted:    '#9a7abf',
       textDim:      '#5a4078',
@@ -102,10 +97,9 @@ const themes: Record<ThemeName, Theme> = {
   'dark-orange': {
     label: 'Naranja Oscuro',
     colors: {
-      bg:           '#080810',
-      bgCard:       '#0e0e1c',
-      bgCardLight:  '#161628',
-      foreground:   '#f5f0e0',
+      bgDark:       '#080810',
+      bg:           '#0e0e1c',
+      bgLight:      '#161628',
       text:         '#f5f0e0',
       textMuted:    '#b8a888',
       textDim:      '#6a5a40',
@@ -121,10 +115,9 @@ const themes: Record<ThemeName, Theme> = {
   'iamsajid': {
     label: 'IamSajid Dark',
     colors: {
-      bg:           '#0d0d2e',
-      bgCard:       '#141440',
-      bgCardLight:  '#191955',
-      foreground:   '#e0e0ff',
+      bgDark:       '#0d0d2e',
+      bg:           '#141440',
+      bgLight:      '#191955',
       text:         '#e0e0ff',
       textMuted:    '#9090e0',
       textDim:      '#5050b0',
@@ -140,10 +133,9 @@ const themes: Record<ThemeName, Theme> = {
   'iamsajid-light': {
     label: 'IamSajid Light',
     colors: {
-      bg:           '#e8e8f8',
-      bgCard:       '#f0f0ff',
-      bgCardLight:  '#f8f8ff',
-      foreground:   '#0a0a50',
+      bgDark:       '#d8d8f0',
+      bg:           '#f0f0ff',
+      bgLight:      '#f8f8ff',
       text:         '#0a0a50',
       textMuted:    '#3030a0',
       textDim:      '#5050c0',

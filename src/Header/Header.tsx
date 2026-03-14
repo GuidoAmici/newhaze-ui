@@ -115,7 +115,7 @@ function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps)
           top: 'calc(100% + 8px)',
           right: 0,
           minWidth: 200,
-          background: theme.bgCard,
+          background: theme.bg,
           border: `1px solid ${theme.border}`,
           borderRadius: 12,
           padding: '8px 0',
@@ -170,7 +170,7 @@ function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps)
               }}
               onMouseEnter={e => {
                 const btn = e.currentTarget as HTMLButtonElement
-                btn.style.background = theme.bgCardLight
+                btn.style.background = theme.bgLight
                 btn.style.color = theme.text
               }}
               onMouseLeave={e => {
@@ -223,7 +223,7 @@ export function Header({
       alignItems: 'center',
       gap: 24,
       height: 56,
-      background: `${theme.bg}ee`,
+      background: `${theme.bgDark}ee`,
       backdropFilter: 'blur(10px)',
       position: 'sticky',
       top: 0,

@@ -38,9 +38,9 @@ const COLOR_SCHEME: Record<ThemeName, string> = {
 function applyTheme(name: ThemeName, colors: ThemeColors) {
   const root = document.documentElement
   // CSS variables
-  root.style.setProperty('--nh-bg',            colors.bg)
-  root.style.setProperty('--nh-bg-card',       colors.bgCard)
-  root.style.setProperty('--nh-bg-card-light', colors.bgCardLight)
+  root.style.setProperty('--nh-bg-dark',  colors.bgDark)
+  root.style.setProperty('--nh-bg',       colors.bg)
+  root.style.setProperty('--nh-bg-light', colors.bgLight)
   root.style.setProperty('--nh-text',          colors.text)
   root.style.setProperty('--nh-text-muted',    colors.textMuted)
   root.style.setProperty('--nh-text-dim',      colors.textDim)

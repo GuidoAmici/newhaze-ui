@@ -49,9 +49,9 @@ export function ThemePicker() {
       {open && (
         <div style={{
           position: 'absolute', right: 0, top: '100%', marginTop: 4,
-          background: theme.bgCard, border: `1px solid ${theme.border}`,
+          background: theme.bg, border: `1px solid ${theme.border}`,
           borderRadius: 10, padding: 4, zIndex: 200, minWidth: 170,
-          boxShadow: `0 8px 24px ${theme.bg}cc`,
+          boxShadow: `0 8px 24px ${theme.bgDark}cc`,
         }}>
           {themeOptions.map(t => (
             <button
@@ -60,7 +60,7 @@ export function ThemePicker() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 8, width: '100%',
                 padding: '6px 10px',
-                background: themeName === t.value ? theme.bgCardLight : 'transparent',
+                background: themeName === t.value ? theme.bgLight : 'transparent',
                 border: 'none', borderRadius: 6, cursor: 'pointer',
                 fontSize: 12, color: theme.text, fontFamily: 'inherit',
               }}
