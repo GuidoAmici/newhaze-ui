@@ -22,6 +22,8 @@ const HTML_CLASSES: Record<ThemeName, string[]> = {
   'light-legacy':   ['light-legacy'],
   'neon-purple-v2': ['dark', 'neon-purple-v2'],
   'dark-orange':    ['dark', 'dark-orange'],
+  'iamsajid':       ['iamsajid'],
+  'iamsajid-light': ['iamsajid-light'],
 }
 const COLOR_SCHEME: Record<ThemeName, string> = {
   'neon-purple':    'dark',
@@ -29,6 +31,8 @@ const COLOR_SCHEME: Record<ThemeName, string> = {
   'light-legacy':   'light',
   'neon-purple-v2': 'dark',
   'dark-orange':    'dark',
+  'iamsajid':       'dark',
+  'iamsajid-light': 'light',
 }
 
 function applyTheme(name: ThemeName, colors: ThemeColors) {
@@ -48,7 +52,7 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--nh-cta',           colors.cta)
   root.style.setProperty('--nh-cta-light',     colors.ctaLight)
   // CSS classes (for Tailwind dark: variant + website globals.css)
-  root.classList.remove('dark', 'green-botanical', 'light-legacy')
+  root.classList.remove('dark', 'green-botanical', 'light-legacy', 'iamsajid', 'iamsajid-light')
   HTML_CLASSES[name].forEach(c => root.classList.add(c))
   root.style.colorScheme = COLOR_SCHEME[name]
 }

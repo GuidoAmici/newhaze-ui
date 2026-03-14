@@ -20,7 +20,7 @@ export interface Theme {
   colors: ThemeColors
 }
 
-export type ThemeName = 'neon-purple' | 'green-botanical' | 'light-legacy' | 'neon-purple-v2' | 'dark-orange'
+export type ThemeName = 'neon-purple' | 'green-botanical' | 'light-legacy' | 'neon-purple-v2' | 'dark-orange' | 'iamsajid' | 'iamsajid-light'
 
 const themes: Record<ThemeName, Theme> = {
   'neon-purple': {
@@ -116,6 +116,44 @@ const themes: Record<ThemeName, Theme> = {
       accentNeon:   '#ccff00',
       cta:          '#ffb300',
       ctaLight:     '#ffd54f',
+    },
+  },
+  'iamsajid': {
+    label: 'IamSajid Dark',
+    colors: {
+      bg:           '#0d0d2e',
+      bgCard:       '#141440',
+      bgCardLight:  '#191955',
+      foreground:   '#e0e0ff',
+      text:         '#e0e0ff',
+      textMuted:    '#9090e0',
+      textDim:      '#5050b0',
+      border:       '#3030a0',
+      borderLight:  '#202080',
+      accent:       '#8080e0',
+      accentBright: '#a0a0f0',
+      accentNeon:   '#c0c0ff',
+      cta:          '#c8b040',
+      ctaLight:     '#d8c060',
+    },
+  },
+  'iamsajid-light': {
+    label: 'IamSajid Light',
+    colors: {
+      bg:           '#e8e8f8',
+      bgCard:       '#f0f0ff',
+      bgCardLight:  '#f8f8ff',
+      foreground:   '#0a0a50',
+      text:         '#0a0a50',
+      textMuted:    '#3030a0',
+      textDim:      '#5050c0',
+      border:       '#6060c0',
+      borderLight:  '#7878d0',
+      accent:       '#3030a0',
+      accentBright: '#4040b0',
+      accentNeon:   '#6060c0',
+      cta:          '#887020',
+      ctaLight:     '#a08030',
     },
   },
 }

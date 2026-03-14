@@ -10,6 +10,8 @@ const THEME_ICONS: Record<ThemeName, string> = {
   'light-legacy':   '☀️',
   'neon-purple-v2': '💜',
   'dark-orange':    '🟠',
+  'iamsajid':       '🔵',
+  'iamsajid-light': '🩵',
 }
 
 export function ThemePicker() {
