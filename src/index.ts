@@ -11,3 +11,6 @@ export type { AuthModalProps } from './AuthModal/AuthModal'
 
 export { UserSettings } from './UserSettings/UserSettings'
 export type { UserSettingsProps, SettingsUser } from './UserSettings/UserSettings'
+
+export { Card, CardSection } from './Card/Card'
+export type { CardProps, CardSectionProps } from './Card/Card'
