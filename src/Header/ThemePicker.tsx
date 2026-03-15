@@ -49,7 +49,7 @@ export function ThemePicker() {
       {open && (
         <div style={{
           position: 'absolute', right: 0, top: '100%', marginTop: 4,
-          background: theme.bg, border: `1px solid ${theme.border}`,
+          background: theme.bgLight, border: `1px solid ${theme.border}`,
           borderRadius: 10, padding: 4, zIndex: 200, minWidth: 170,
           boxShadow: `0 8px 24px ${theme.bgDark}cc`,
         }}>
