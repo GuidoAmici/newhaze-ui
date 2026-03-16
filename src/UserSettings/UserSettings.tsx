@@ -58,7 +58,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
     borderRadius: 10,
     background: `linear-gradient(135deg, ${theme.cta}, ${theme.ctaLight})`,
     border: 'none',
-    color: '#0a0e1a',
+    color: theme.ctaText,
     fontWeight: 700,
     cursor: loading ? 'not-allowed' : 'pointer',
     fontSize: 14,
@@ -152,7 +152,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
           </button>
         </div>
         {error && (
-          <div style={{ marginTop: 8, fontSize: 12, color: '#f87171' }}>{error}</div>
+          <div style={{ marginTop: 8, fontSize: 12, color: theme.error }}>{error}</div>
         )}
       </div>
 

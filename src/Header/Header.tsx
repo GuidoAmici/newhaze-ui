@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../ThemeProvider'
 import { ThemePicker } from './ThemePicker'
+import { Logo } from '../Logo/Logo'
 
 function useIsMobile(breakpoint = 768): boolean {
   const [isMobile, setIsMobile] = useState(() =>
@@ -231,9 +232,8 @@ export function Header({
     }}>
 
       {/* Logo */}
-      <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-        <span style={{ fontSize: 20 }}>🌿</span>
-        <span style={{ fontSize: 16, fontWeight: 600, color: theme.accentBright }}>New Haze</span>
+      <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <Logo variant="full" size={28} color={theme.accentBright} accentColor={theme.accent} />
       </LinkComponent>
 
       {/* Nav — hidden on mobile */}

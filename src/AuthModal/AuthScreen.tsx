@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useTheme } from '../ThemeProvider'
+import { Logo } from '../Logo/Logo'
 
 // Inline window.google type to avoid needing @types/google-one-tap
 declare global {
@@ -79,14 +80,15 @@ function Card({ children, title, subtitle }: CardProps) {
 }
 
 function ErrorBox({ msg }: { msg: string }) {
+  const { theme } = useTheme()
   return (
     <div style={{
-      background: 'rgba(220, 38, 38, 0.12)',
-      border: '1px solid rgba(220, 38, 38, 0.3)',
+      background: theme.errorBg,
+      border: `1px solid ${theme.errorBorder}`,
       borderRadius: 8,
       padding: '10px 12px',
       fontSize: 13,
-      color: '#f87171',
+      color: theme.error,
     }}>
       {msg}
     </div>
@@ -243,7 +245,7 @@ export function AuthScreen({
     borderRadius: 12,
     background: `linear-gradient(135deg, ${theme.cta}, ${theme.ctaLight})`,
     border: 'none',
-    color: '#0a0e1a',
+    color: theme.ctaText,
     fontWeight: 700,
     cursor: loading ? 'not-allowed' : 'pointer',
     fontSize: 15,
@@ -366,9 +368,10 @@ export function AuthScreen({
       {(mode === 'login' || mode === 'register') && (
         <Card>
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
-            <div style={{ fontSize: 40, marginBottom: 10 }}>🌿</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: theme.text }}>{appName}</div>
-            <div style={{ fontSize: 13, color: theme.textMuted, marginTop: 4 }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+              <Logo variant="icon" size={56} color="#fff" accentColor={theme.accent} />
+            </div>
+            <div style={{ fontSize: 13, color: theme.textMuted }}>
               {mode === 'login' ? 'Bienvenido de vuelta' : 'Creá tu cuenta para empezar'}
             </div>
           </div>
