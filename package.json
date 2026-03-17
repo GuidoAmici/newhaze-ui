@@ -6,7 +6,8 @@
     ".": {
       "import": "./dist/newhaze-ui.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./dist/newhaze-ui.css": "./dist/newhaze-ui.css"
   },
   "main": "./dist/newhaze-ui.js",
   "types": "./dist/index.d.ts",
