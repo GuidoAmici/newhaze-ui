@@ -1,0 +1,32 @@
+.card {
+  text-align: center;
+  padding: var(--nh-space-8) var(--nh-space-6);
+  transition: transform 220ms var(--nh-ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.iconCircle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--nh-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--nh-space-5);
+}
+
+.title {
+  font-size: var(--nh-text-md);
+  font-weight: var(--nh-weight-bold);
+  margin-bottom: var(--nh-space-3);
+  letter-spacing: var(--nh-tracking-wide);
+}
+
+.description {
+  font-size: var(--nh-text-sm);
+  line-height: var(--nh-leading-normal);
+  text-wrap: pretty;
+}
