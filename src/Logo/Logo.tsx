@@ -58,8 +58,8 @@ const WORD_RATIO = 1080 / 283.66  // same viewBox as logotipo
 export function Logo({
   variant = 'full',
   size = 32,
-  color = 'currentColor',
-  accentColor = '#925cf5',
+  color = 'var(--nh-accent-bright)',
+  accentColor = 'var(--nh-accent)',
   className,
   style,
   'aria-label': ariaLabel = 'New Haze',

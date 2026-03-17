@@ -6,9 +6,8 @@ import { ThemePicker } from './ThemePicker'
 import { Logo } from '../Logo/Logo'
 
 function useIsMobile(breakpoint = 768): boolean {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
-  )
+  // Always false on server so SSR and client initial render agree.
+  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
     setIsMobile(mq.matches)
@@ -210,7 +209,7 @@ export function Header({
   const navLinkStyle = (isActive: boolean): React.CSSProperties => ({
     fontSize: 13,
     fontWeight: isActive ? 600 : 400,
-    color: isActive ? theme.accentBright : theme.textMuted,
+    color: isActive ? 'var(--nh-accent-bright)' : 'var(--nh-text-muted)',
     textDecoration: 'none',
     cursor: 'pointer',
     transition: 'color 0.15s',
@@ -218,13 +217,13 @@ export function Header({
 
   return (
     <header style={{
-      borderBottom: `1px solid ${theme.border}`,
+      borderBottom: '1px solid var(--nh-border)',
       padding: isMobile ? '0 16px' : '0 32px',
       display: 'flex',
       alignItems: 'center',
       gap: 24,
       height: 56,
-      background: `${theme.bg}ee`,
+      background: 'color-mix(in srgb, var(--nh-bg) 93%, transparent)',
       backdropFilter: 'blur(10px)',
       position: 'sticky',
       top: 0,
@@ -233,7 +232,7 @@ export function Header({
 
       {/* Logo */}
       <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <Logo variant="full" size={28} color={theme.accentBright} accentColor={theme.accent} />
+        <Logo variant="full" size={28} />
       </LinkComponent>
 
       {/* Nav — hidden on mobile */}
@@ -264,10 +263,10 @@ export function Header({
             onClick={onLogin}
             style={{
               background: 'none',
-              border: `1px solid ${theme.border}`,
+              border: '1px solid var(--nh-border)',
               borderRadius: 8,
               padding: '4px 10px',
-              color: theme.accentBright,
+              color: 'var(--nh-accent-bright)',
               cursor: 'pointer',
               fontSize: 11,
               fontFamily: 'inherit',

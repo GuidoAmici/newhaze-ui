@@ -193,15 +193,19 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
 // ── Provider ──────────────────────────────────────────────────────────────────
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [themeName, setThemeNameState] = useState<ThemeName>(() => {
-    try {
-      return resolveThemeName(localStorage.getItem(STORAGE_KEY))
-    } catch {
-      return DEFAULT_THEME
-    }
-  })
+  // Always start with DEFAULT_THEME so server and client initial renders match.
+  // localStorage is read in a useEffect (client-only) to avoid hydration mismatch.
+  const [themeName, setThemeNameState] = useState<ThemeName>(DEFAULT_THEME)
 
   const theme = useMemo(() => themes[themeName].colors, [themeName])
+
+  useEffect(() => {
+    // Read stored preference after mount — safe to access localStorage here.
+    try {
+      const stored = resolveThemeName(localStorage.getItem(STORAGE_KEY))
+      if (stored !== DEFAULT_THEME) setThemeNameState(stored)
+    } catch {}
+  }, [])
 
   useEffect(() => {
     injectStaticCSS()
