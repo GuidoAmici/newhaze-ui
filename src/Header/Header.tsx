@@ -119,7 +119,7 @@ function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps)
           border: `1px solid ${theme.border}`,
           borderRadius: 12,
           padding: '8px 0',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.14)',
           zIndex: 200,
         }}>
           {/* User info */}

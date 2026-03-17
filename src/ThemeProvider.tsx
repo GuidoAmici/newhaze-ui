@@ -68,10 +68,10 @@ const STATIC_CSS = `
   --nh-radius-full: 9999px;
 
   /* ── Shadows ──────────────────────── */
-  --nh-shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.30);
-  --nh-shadow-md: 0 4px 12px 0 rgba(0,0,0,0.35);
-  --nh-shadow-lg: 0 8px 24px 0 rgba(0,0,0,0.40);
-  --nh-shadow-xl: 0 16px 48px 0 rgba(0,0,0,0.50);
+  --nh-shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.10);
+  --nh-shadow-md: 0 4px 12px 0 rgba(0,0,0,0.12);
+  --nh-shadow-lg: 0 8px 24px 0 rgba(0,0,0,0.14);
+  --nh-shadow-xl: 0 16px 48px 0 rgba(0,0,0,0.18);
   --nh-shadow-glow-accent: 0 0 16px 2px var(--nh-accent);
   --nh-shadow-glow-neon:   0 0 12px 2px var(--nh-accent-neon);
 

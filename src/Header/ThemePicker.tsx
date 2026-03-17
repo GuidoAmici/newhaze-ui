@@ -51,7 +51,7 @@ export function ThemePicker() {
           position: 'absolute', right: 0, top: '100%', marginTop: 4,
           background: theme.bgLight, border: `1px solid ${theme.border}`,
           borderRadius: 10, padding: 4, zIndex: 200, minWidth: 170,
-          boxShadow: `0 8px 24px ${theme.bgDark}cc`,
+          boxShadow: '0 8px 24px rgba(0,0,0,0.14)',
         }}>
           {themeOptions.map(t => (
             <button
