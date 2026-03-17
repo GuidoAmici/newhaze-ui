@@ -73,7 +73,6 @@ const STATIC_CSS = `
   --nh-shadow-lg: 0 8px 24px 0 rgba(0,0,0,0.40);
   --nh-shadow-xl: 0 16px 48px 0 rgba(0,0,0,0.50);
   --nh-shadow-glow-accent: 0 0 16px 2px var(--nh-accent);
-  --nh-shadow-glow-cta:    0 0 20px 4px var(--nh-cta);
   --nh-shadow-glow-neon:   0 0 12px 2px var(--nh-accent-neon);
 
   /* ── Z-index ──────────────────────── */
@@ -173,9 +172,6 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--nh-accent',        colors.accent)
   root.style.setProperty('--nh-accent-bright', colors.accentBright)
   root.style.setProperty('--nh-accent-neon',   colors.accentNeon)
-  root.style.setProperty('--nh-cta',           colors.cta)
-  root.style.setProperty('--nh-cta-light',     colors.ctaLight)
-  root.style.setProperty('--nh-cta-text',      colors.ctaText)
   root.style.setProperty('--nh-error',         colors.error)
   root.style.setProperty('--nh-error-bg',      colors.errorBg)
   root.style.setProperty('--nh-error-border',  colors.errorBorder)

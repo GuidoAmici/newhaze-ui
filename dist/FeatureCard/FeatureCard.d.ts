@@ -3,6 +3,6 @@ export interface FeatureCardProps {
     icon: React.ReactNode;
     title: string;
     description: string;
-    iconVariant?: 'accent' | 'cta' | 'success';
+    iconVariant?: 'accent' | 'accent-bright' | 'success';
 }
 export declare function FeatureCard({ icon, title, description, iconVariant }: FeatureCardProps): import("react/jsx-runtime").JSX.Element;

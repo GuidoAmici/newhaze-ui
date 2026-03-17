@@ -10,9 +10,6 @@ export interface ThemeColors {
     accent: string;
     accentBright: string;
     accentNeon: string;
-    cta: string;
-    ctaLight: string;
-    ctaText: string;
     error: string;
     errorBg: string;
     errorBorder: string;

@@ -24,7 +24,7 @@ export function ProductCard({ image, imageAlt, title, description, price }: Prod
         <div className={styles.body}>
           <h3 className={styles.title} style={{ color: theme.text }}>{title}</h3>
           <p className={styles.description} style={{ color: theme.textMuted }}>{description}</p>
-          <p className={styles.price} style={{ color: theme.cta }}>{price}</p>
+          <p className={styles.price} style={{ color: theme.accentBright }}>{price}</p>
         </div>
       </Card>
     </div>

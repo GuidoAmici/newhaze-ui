@@ -8,17 +8,6 @@
   background: var(--nh-bg-dark);
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--nh-accent) 12%, transparent) 0%,
-    color-mix(in srgb, var(--nh-cta) 8%, transparent) 100%
-  );
-  pointer-events: none;
-}
 
 .content {
   position: relative;
@@ -45,10 +34,7 @@
 }
 
 .highlight {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, var(--nh-cta), var(--nh-cta-light));
+  color: var(--nh-accent-bright);
 }
 
 .description {

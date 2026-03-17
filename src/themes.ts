@@ -10,14 +10,10 @@ export interface ThemeColors {
   // ── Borders ───────────────────────────────────────────────────────────────
   border: string
   borderLight: string
-  // ── Accent ladder ─────────────────────────────────────────────────────────
+  // ── Accent (primary brand color — drives both CTAs and informational highlights) ──
   accent: string
   accentBright: string
   accentNeon: string
-  // ── Call-to-action ────────────────────────────────────────────────────────
-  cta: string
-  ctaLight: string
-  ctaText: string       // contrast-safe text color on top of cta gradient
   // ── Semantic states ───────────────────────────────────────────────────────
   error: string
   errorBg: string
@@ -81,9 +77,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#00b8d4',
       accentBright: '#20d4f0',
       accentNeon:   '#70eeff',
-      cta:          '#ff4d9e',
-      ctaLight:     '#ff80c0',
-      ctaText:      '#080f1c',
       error:        '#ff6b8a',
       errorBg:      'rgba(255,60,80,0.10)',
       errorBorder:  'rgba(255,60,80,0.25)',
@@ -113,9 +106,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#c87800',
       accentBright: '#e89a00',
       accentNeon:   '#ffc830',
-      cta:          '#00b090',
-      ctaLight:     '#20d0b0',
-      ctaText:      '#040308',
       error:        '#ff7060',
       errorBg:      'rgba(220,60,40,0.10)',
       errorBorder:  'rgba(220,60,40,0.25)',
@@ -145,9 +135,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#2a5c1c',
       accentBright: '#3a7828',
       accentNeon:   '#4e9835',
-      cta:          '#d95808',
-      ctaLight:     '#f07030',
-      ctaText:      '#ffffff',
       error:        '#c22c00',
       errorBg:      'rgba(194,44,0,0.07)',
       errorBorder:  'rgba(194,44,0,0.18)',
@@ -174,9 +161,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#6b3fa0',
       accentBright: '#9b6fd4',
       accentNeon:   '#c8a8ff',
-      cta:          '#f59e0b',
-      ctaLight:     '#fbbf24',
-      ctaText:      '#0a0e1a',
       error:        '#f87171',
       errorBg:      'rgba(220,38,38,0.10)',
       errorBorder:  'rgba(220,38,38,0.25)',
@@ -201,9 +185,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#2e7d32',
       accentBright: '#4caf50',
       accentNeon:   '#81c784',
-      cta:          '#f97316',
-      ctaLight:     '#fb923c',
-      ctaText:      '#0a0e1a',
       error:        '#f87171',
       errorBg:      'rgba(220,38,38,0.10)',
       errorBorder:  'rgba(220,38,38,0.25)',
@@ -228,9 +209,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#7c3aed',
       accentBright: '#8b5cf6',
       accentNeon:   '#a78bfa',
-      cta:          '#f97316',
-      ctaLight:     '#fb923c',
-      ctaText:      '#0a0e1a',
       error:        '#dc2626',
       errorBg:      'rgba(220,38,38,0.07)',
       errorBorder:  'rgba(220,38,38,0.20)',
@@ -255,9 +233,6 @@ const themes: Record<ThemeName, Theme> = {
       accent:       '#ff6b00',
       accentBright: '#ff9a3c',
       accentNeon:   '#ffcc00',   // replaced #ccff00 — less garish, still energetic
-      cta:          '#ffb300',
-      ctaLight:     '#ffd54f',
-      ctaText:      '#0a0e1a',
       error:        '#f87171',
       errorBg:      'rgba(220,38,38,0.10)',
       errorBorder:  'rgba(220,38,38,0.25)',
