@@ -25,7 +25,7 @@ export interface Theme {
     label: string;
     colors: ThemeColors;
 }
-export type ThemeName = 'dark-purple' | 'green-botanical' | 'light' | 'dark-orange';
+export type ThemeName = 'new-haze' | 'rabbitek' | 'canahoria' | 'dark-purple' | 'green-botanical' | 'light' | 'dark-orange';
 export declare function resolveThemeName(stored: string | null): ThemeName;
 declare const themes: Record<ThemeName, Theme>;
 export default themes;

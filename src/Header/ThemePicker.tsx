@@ -5,8 +5,11 @@ import { useTheme } from '../ThemeProvider'
 import { ThemeName } from '../themes'
 
 const THEME_ICONS: Record<ThemeName, string> = {
+  'new-haze':        '🐰',
+  'rabbitek':        '🥕',
+  'canahoria':       '🌿',
   'dark-purple':     '🟣',
-  'green-botanical': '🌿',
+  'green-botanical': '🌱',
   'light':           '☀️',
   'dark-orange':     '🟠',
 }

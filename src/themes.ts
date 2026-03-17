@@ -34,24 +34,132 @@ export interface Theme {
   colors: ThemeColors
 }
 
-export type ThemeName = 'dark-purple' | 'green-botanical' | 'light' | 'dark-orange'
+export type ThemeName =
+  | 'new-haze'
+  | 'rabbitek'
+  | 'canahoria'
+  | 'dark-purple'
+  | 'green-botanical'
+  | 'light'
+  | 'dark-orange'
 
-/** Legacy names that may exist in localStorage — all map to 'dark-purple' */
+/** Legacy names that may exist in localStorage */
 const LEGACY_THEME_MAP: Record<string, ThemeName> = {
-  'neon-purple':    'dark-purple',
-  'neon-purple-v2': 'dark-purple',
-  'light-legacy':   'light',
-  'iamsajid':       'dark-purple',
-  'iamsajid-light': 'light',
+  'neon-purple':    'new-haze',
+  'neon-purple-v2': 'new-haze',
+  'light-legacy':   'canahoria',
+  'iamsajid':       'new-haze',
+  'iamsajid-light': 'canahoria',
+  'dark-purple':    'new-haze',
 }
 
 export function resolveThemeName(stored: string | null): ThemeName {
-  if (!stored) return 'dark-purple'
+  if (!stored) return 'new-haze'
   if (stored in themes) return stored as ThemeName
-  return LEGACY_THEME_MAP[stored] ?? 'dark-purple'
+  return LEGACY_THEME_MAP[stored] ?? 'new-haze'
 }
 
 const themes: Record<ThemeName, Theme> = {
+  // ── Brand themes (canonical, image-inspired) ──────────────────────────────
+
+  /**
+   * New Haze — DARK
+   * Midnight blue backgrounds, gummy hot-pink CTA, aqua-cyan accent.
+   * Playful, colourful, candy-neon. Inspired by Sticker 1.
+   */
+  'new-haze': {
+    label: 'New Haze',
+    colors: {
+      bgDark:       '#080f1c',
+      bg:           '#0d1a2e',
+      bgLight:      '#152338',
+      text:         '#dff0ff',
+      textMuted:    '#6ab0d8',
+      textDim:      '#2e5878',
+      border:       '#183050',
+      borderLight:  '#224268',
+      accent:       '#00b8d4',
+      accentBright: '#20d4f0',
+      accentNeon:   '#70eeff',
+      cta:          '#ff4d9e',
+      ctaLight:     '#ff80c0',
+      ctaText:      '#080f1c',
+      error:        '#ff6b8a',
+      errorBg:      'rgba(255,60,80,0.10)',
+      errorBorder:  'rgba(255,60,80,0.25)',
+      success:      '#20d8a0',
+      successBg:    'rgba(0,200,140,0.10)',
+      successBorder:'rgba(0,200,140,0.25)',
+      focus:        '#70eeff',
+    },
+  },
+
+  /**
+   * Rabbitek — DARK
+   * Near-black background, golden-carrot orange accent, aqua verde CTA.
+   * Serious, authoritative, impactful. Inspired by Sticker 2.
+   */
+  'rabbitek': {
+    label: 'Rabbitek',
+    colors: {
+      bgDark:       '#040308',
+      bg:           '#080610',
+      bgLight:      '#0e0c18',
+      text:         '#f0e8cc',
+      textMuted:    '#9a8258',
+      textDim:      '#5a4c30',
+      border:       '#1a1408',
+      borderLight:  '#261e0c',
+      accent:       '#c87800',
+      accentBright: '#e89a00',
+      accentNeon:   '#ffc830',
+      cta:          '#00b090',
+      ctaLight:     '#20d0b0',
+      ctaText:      '#040308',
+      error:        '#ff7060',
+      errorBg:      'rgba(220,60,40,0.10)',
+      errorBorder:  'rgba(220,60,40,0.25)',
+      success:      '#00c89a',
+      successBg:    'rgba(0,180,140,0.10)',
+      successBorder:'rgba(0,180,140,0.25)',
+      focus:        '#ffc830',
+    },
+  },
+
+  /**
+   * Canahoria — LIGHT
+   * Warm cream/beige backgrounds, carrot orange CTA, leafy dark green accent.
+   * Relaxed, earthy, established. Inspired by Sticker 3.
+   */
+  'canahoria': {
+    label: 'Canahoria',
+    colors: {
+      bgDark:       '#e0d8c8',
+      bg:           '#f5f0e5',
+      bgLight:      '#fdfbf7',
+      text:         '#2a1e0c',
+      textMuted:    '#6a5a3a',
+      textDim:      '#7a6848',
+      border:       '#d8cdb0',
+      borderLight:  '#e5dcc8',
+      accent:       '#2a5c1c',
+      accentBright: '#3a7828',
+      accentNeon:   '#4e9835',
+      cta:          '#d95808',
+      ctaLight:     '#f07030',
+      ctaText:      '#ffffff',
+      error:        '#c22c00',
+      errorBg:      'rgba(194,44,0,0.07)',
+      errorBorder:  'rgba(194,44,0,0.18)',
+      success:      '#2a5c1c',
+      successBg:    'rgba(42,92,28,0.08)',
+      successBorder:'rgba(42,92,28,0.20)',
+      focus:        '#2a5c1c',
+    },
+  },
+
+  // ── Extended themes ───────────────────────────────────────────────────────
+
   'dark-purple': {
     label: 'Púrpura Oscuro',
     colors: {

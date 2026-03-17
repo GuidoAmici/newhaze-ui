@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import themes, { ThemeColors, ThemeName, resolveThemeName } from './themes'
 
 const STORAGE_KEY = 'nh_theme'
-const DEFAULT_THEME: ThemeName = 'dark-purple'
+const DEFAULT_THEME: ThemeName = 'new-haze'
 
 // ── Static tokens (not per-theme) ─────────────────────────────────────────────
 // Injected once into <head> on first ThemeProvider mount.
@@ -139,6 +139,9 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 const HTML_CLASSES: Record<ThemeName, string[]> = {
+  'new-haze':        ['dark', 'new-haze'],
+  'rabbitek':        ['dark', 'rabbitek'],
+  'canahoria':       ['canahoria'],
   'dark-purple':     ['dark'],
   'green-botanical': ['dark', 'green-botanical'],
   'light':           ['light'],
@@ -146,6 +149,9 @@ const HTML_CLASSES: Record<ThemeName, string[]> = {
 }
 
 const COLOR_SCHEME: Record<ThemeName, string> = {
+  'new-haze':        'dark',
+  'rabbitek':        'dark',
+  'canahoria':       'light',
   'dark-purple':     'dark',
   'green-botanical': 'dark',
   'light':           'light',
@@ -179,7 +185,7 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--nh-focus',         colors.focus)
 
   // CSS classes (for Tailwind dark: variant + website globals.css)
-  root.classList.remove('dark', 'green-botanical', 'dark-orange', 'light')
+  root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'green-botanical', 'dark-orange', 'light')
   HTML_CLASSES[name].forEach(c => root.classList.add(c))
   root.style.colorScheme = COLOR_SCHEME[name]
 }
