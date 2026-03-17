@@ -10,6 +10,8 @@ export interface ThemeColors {
     accent: string;
     accentBright: string;
     accentNeon: string;
+    secondary: string;
+    secondaryBright: string;
     error: string;
     errorBg: string;
     errorBorder: string;
