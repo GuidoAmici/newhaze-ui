@@ -139,42 +139,52 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 
 const HTML_CLASSES: Record<ThemeName, string[]> = {
   'new-haze':        ['dark', 'new-haze'],
+  'new-haze-light':  ['new-haze'],
   'rabbitek':        ['dark', 'rabbitek'],
+  'rabbitek-light':  ['rabbitek'],
   'canahoria':       ['canahoria'],
-  'dark-purple':     ['dark'],
-  'green-botanical': ['dark', 'green-botanical'],
-  'light':           ['light'],
-  'dark-orange':     ['dark', 'dark-orange'],
+  'canahoria-dark':  ['dark', 'canahoria'],
 }
 
 const COLOR_SCHEME: Record<ThemeName, string> = {
   'new-haze':        'dark',
+  'new-haze-light':  'light',
   'rabbitek':        'dark',
+  'rabbitek-light':  'light',
   'canahoria':       'light',
-  'dark-purple':     'dark',
-  'green-botanical': 'dark',
-  'light':           'light',
-  'dark-orange':     'dark',
+  'canahoria-dark':  'dark',
 }
 
 function applyTheme(name: ThemeName, colors: ThemeColors) {
   const root = document.documentElement
 
-  // Color tokens
-  root.style.setProperty('--nh-bg-dark',       colors.bgDark)
-  root.style.setProperty('--nh-bg',            colors.bg)
-  root.style.setProperty('--nh-bg-light',      colors.bgLight)
+  // Surface levels
+  root.style.setProperty('--nh-s0', colors.s0)
+  root.style.setProperty('--nh-s1', colors.s1)
+  root.style.setProperty('--nh-s2', colors.s2)
+  root.style.setProperty('--nh-s3', colors.s3)
+  // Elevation shadows
+  root.style.setProperty('--nh-shadow-sm', colors.shadowSm)
+  root.style.setProperty('--nh-shadow-lg', colors.shadowLg)
+  // Backward-compat aliases (so existing CSS using --nh-bg-* still works)
+  root.style.setProperty('--nh-bg-dark',  colors.s0)
+  root.style.setProperty('--nh-bg',       colors.s1)
+  root.style.setProperty('--nh-bg-light', colors.s2)
+  // Text
   root.style.setProperty('--nh-text',          colors.text)
   root.style.setProperty('--nh-text-muted',    colors.textMuted)
   root.style.setProperty('--nh-text-dim',      colors.textDim)
+  // Borders
   root.style.setProperty('--nh-border',        colors.border)
   root.style.setProperty('--nh-border-light',  colors.borderLight)
+  // Accent
   root.style.setProperty('--nh-accent',            colors.accent)
-  root.style.setProperty('--nh-accent-bright',    colors.accentBright)
-  root.style.setProperty('--nh-accent-neon',      colors.accentNeon)
-  root.style.setProperty('--nh-secondary',        colors.secondary)
-  root.style.setProperty('--nh-secondary-bright', colors.secondaryBright)
-  root.style.setProperty('--nh-error',            colors.error)
+  root.style.setProperty('--nh-accent-bright',     colors.accentBright)
+  root.style.setProperty('--nh-accent-neon',       colors.accentNeon)
+  root.style.setProperty('--nh-secondary',         colors.secondary)
+  root.style.setProperty('--nh-secondary-bright',  colors.secondaryBright)
+  // Semantic
+  root.style.setProperty('--nh-error',         colors.error)
   root.style.setProperty('--nh-error-bg',      colors.errorBg)
   root.style.setProperty('--nh-error-border',  colors.errorBorder)
   root.style.setProperty('--nh-success',       colors.success)
@@ -183,7 +193,7 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--nh-focus',         colors.focus)
 
   // CSS classes (for Tailwind dark: variant + website globals.css)
-  root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'green-botanical', 'dark-orange', 'light')
+  root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'light')
   HTML_CLASSES[name].forEach(c => root.classList.add(c))
   root.style.colorScheme = COLOR_SCHEME[name]
 }

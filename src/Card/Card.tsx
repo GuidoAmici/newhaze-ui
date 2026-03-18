@@ -19,15 +19,13 @@ export function Card({ children, active = false, onClick, style, className }: Ca
       onClick={onClick}
       className={className}
       style={{
-        background: theme.bgLight,
+        background: theme.s2,
         border: `1px solid ${active ? theme.borderLight : theme.border}`,
         borderRadius: 16,
         padding: '20px 20px',
         cursor: onClick ? 'pointer' : 'default',
-        transition: 'background 0.15s, border-color 0.15s, box-shadow 0.15s',
-        boxShadow: active
-          ? `0 0 0 1px ${theme.borderLight}, 0 4px 16px ${theme.bgDark}99`
-          : `0 2px 8px ${theme.bgDark}66`,
+        transition: 'box-shadow 0.2s ease',
+        boxShadow: active ? theme.shadowLg : theme.shadowSm,
         ...style,
       }}
     >
@@ -49,9 +47,10 @@ export function CardSection({ children, style, className }: CardSectionProps) {
     <div
       className={className}
       style={{
-        background: theme.bg,
+        background: theme.s1,
         borderRadius: 20,
         padding: 16,
+        boxShadow: theme.shadowSm,
         ...style,
       }}
     >

@@ -42,6 +42,8 @@ export interface HeaderProps {
   websiteUrl?: string
   /** Base URL for the learn app. Defaults to https://learn.newhaze.ar */
   learnUrl?: string
+  /** Extra nav links injected after the main nav (e.g. page section anchors) */
+  extraNavLinks?: { label: string; href: string }[]
 }
 
 const ROLE_LINKS: { label: string; href: string; roles: string[] }[] = [
@@ -115,7 +117,7 @@ function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps)
           top: 'calc(100% + 8px)',
           right: 0,
           minWidth: 200,
-          background: theme.bgLight,
+          background: theme.s2,
           border: `1px solid ${theme.border}`,
           borderRadius: 12,
           padding: '8px 0',
@@ -170,7 +172,7 @@ function UserMenu({ user, onLogout, profileHref, LinkComponent }: UserMenuProps)
               }}
               onMouseEnter={e => {
                 const btn = e.currentTarget as HTMLButtonElement
-                btn.style.background = theme.bgLight
+                btn.style.background = theme.s2
                 btn.style.color = theme.text
               }}
               onMouseLeave={e => {
@@ -197,6 +199,7 @@ export function Header({
   LinkComponent = DefaultLink,
   websiteUrl = 'https://newhaze.ar',
   learnUrl = 'https://learn.newhaze.ar',
+  extraNavLinks,
 }: HeaderProps) {
   const { theme } = useTheme()
   const isMobile = useIsMobile()
@@ -240,6 +243,11 @@ export function Header({
         <nav style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
           {navLinks.map(link => (
             <LinkComponent key={link.app} href={link.href} style={navLinkStyle(activeApp === link.app)}>
+              {link.label}
+            </LinkComponent>
+          ))}
+          {extraNavLinks?.map(link => (
+            <LinkComponent key={link.href} href={link.href} style={navLinkStyle(false)}>
               {link.label}
             </LinkComponent>
           ))}

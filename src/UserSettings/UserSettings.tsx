@@ -43,7 +43,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
 
   const inp: React.CSSProperties = {
     flex: 1,
-    background: theme.bgLight,
+    background: theme.s2,
     border: `1px solid ${theme.border}`,
     borderRadius: 10,
     padding: '10px 14px',
@@ -58,7 +58,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
     borderRadius: 10,
     background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentBright})`,
     border: 'none',
-    color: theme.bgDark,
+    color: theme.s0,
     fontWeight: 700,
     cursor: loading ? 'not-allowed' : 'pointer',
     fontSize: 14,
@@ -78,7 +78,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
         <div style={{
           width: 56, height: 56, borderRadius: '50%',
-          background: theme.bgLight,
+          background: theme.s2,
           border: `2px solid ${theme.border}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 26, flexShrink: 0,
@@ -99,7 +99,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
                   key={role}
                   style={{
                     fontSize: 10, fontWeight: 600, padding: '2px 8px', borderRadius: 20,
-                    background: theme.bgLight, border: `1px solid ${theme.borderLight}`,
+                    background: theme.s2, border: `1px solid ${theme.borderLight}`,
                     color: theme.accentBright, textTransform: 'uppercase', letterSpacing: '0.05em',
                   }}
                 >
@@ -118,7 +118,7 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
             <span>Nivel {user.level}</span>
             <span>{user.xp} XP</span>
           </div>
-          <div style={{ height: 8, background: theme.bgLight, borderRadius: 99, overflow: 'hidden', border: `1px solid ${theme.border}` }}>
+          <div style={{ height: 8, background: theme.s2, borderRadius: 99, overflow: 'hidden', border: `1px solid ${theme.border}` }}>
             <div style={{
               height: '100%',
               width: `${xpPercent}%`,
@@ -185,3 +185,4 @@ export function UserSettings({ user, onUpdateUsername, onLogout }: UserSettingsP
     </div>
   )
 }
+

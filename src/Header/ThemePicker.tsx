@@ -5,13 +5,12 @@ import { useTheme } from '../ThemeProvider'
 import { ThemeName } from '../themes'
 
 const THEME_ICONS: Record<ThemeName, string> = {
-  'new-haze':        '🐰',
-  'rabbitek':        '🥕',
+  'new-haze':        '🌙',
+  'new-haze-light':  '🌸',
+  'rabbitek':        '🌑',
+  'rabbitek-light':  '✨',
   'canahoria':       '🌿',
-  'dark-purple':     '🟣',
-  'green-botanical': '🌱',
-  'light':           '☀️',
-  'dark-orange':     '🟠',
+  'canahoria-dark':  '🍂',
 }
 
 export function ThemePicker() {
@@ -49,7 +48,7 @@ export function ThemePicker() {
       {open && (
         <div style={{
           position: 'absolute', right: 0, top: '100%', marginTop: 4,
-          background: theme.bgLight, border: `1px solid ${theme.border}`,
+          background: theme.s2, border: `1px solid ${theme.border}`,
           borderRadius: 10, padding: 4, zIndex: 200, minWidth: 170,
           boxShadow: '0 8px 24px rgba(0,0,0,0.14)',
         }}>
@@ -60,7 +59,7 @@ export function ThemePicker() {
               style={{
                 display: 'flex', alignItems: 'center', gap: 8, width: '100%',
                 padding: '6px 10px',
-                background: themeName === t.value ? theme.bgLight : 'transparent',
+                background: themeName === t.value ? theme.s2 : 'transparent',
                 border: 'none', borderRadius: 6, cursor: 'pointer',
                 fontSize: 12, color: theme.text, fontFamily: 'inherit',
               }}
@@ -75,3 +74,4 @@ export function ThemePicker() {
     </div>
   )
 }
+

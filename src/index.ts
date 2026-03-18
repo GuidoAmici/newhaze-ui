@@ -20,8 +20,6 @@ export type { CardProps, CardSectionProps } from './Card/Card'
 export { BetaBanner } from './BetaBanner/BetaBanner'
 export type { BetaBannerProps } from './BetaBanner/BetaBanner'
 
-export { HeroSection } from './HeroSection/HeroSection'
-export type { HeroSectionProps } from './HeroSection/HeroSection'
 
 export { ProductCard } from './ProductCard/ProductCard'
 export type { ProductCardProps } from './ProductCard/ProductCard'

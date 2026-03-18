@@ -61,7 +61,7 @@ function Card({ children, title, subtitle }: CardProps) {
   const { theme } = useTheme()
   return (
     <div style={{
-      background: theme.bg,
+      background: theme.s1,
       border: `1px solid ${theme.border}`,
       borderRadius: 20,
       padding: '32px 28px',
@@ -228,7 +228,7 @@ export function AuthScreen({
 
   const inp: React.CSSProperties = {
     width: '100%',
-    background: theme.bgLight,
+    background: theme.s2,
     border: `1px solid ${theme.border}`,
     borderRadius: 10,
     padding: '12px 14px',
@@ -245,7 +245,7 @@ export function AuthScreen({
     borderRadius: 12,
     background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentBright})`,
     border: 'none',
-    color: theme.bgDark,
+    color: theme.s0,
     fontWeight: 700,
     cursor: loading ? 'not-allowed' : 'pointer',
     fontSize: 15,
@@ -278,7 +278,7 @@ export function AuthScreen({
                 onKeyDown={e => handleOtpKeyDown(i, e)}
                 style={{
                   width: 44, height: 54, textAlign: 'center', fontSize: 24, fontWeight: 700,
-                  background: theme.bgLight, border: `1.5px solid ${val ? theme.accent : theme.border}`,
+                  background: theme.s2, border: `1.5px solid ${val ? theme.accent : theme.border}`,
                   borderRadius: 10, color: theme.text, outline: 'none', fontFamily: 'inherit',
                   transition: 'border-color 0.15s',
                 }}
@@ -475,3 +475,4 @@ export function AuthScreen({
 
   return compact ? content : <Wrapper>{content}</Wrapper>
 }
+

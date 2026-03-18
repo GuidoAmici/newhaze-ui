@@ -25,6 +25,11 @@ export interface HeaderProps {
     websiteUrl?: string;
     /** Base URL for the learn app. Defaults to https://learn.newhaze.ar */
     learnUrl?: string;
+    /** Extra nav links injected after the main nav (e.g. page section anchors) */
+    extraNavLinks?: {
+        label: string;
+        href: string;
+    }[];
 }
-export declare function Header({ activeApp, user, onLogin, onLogout, profileHref, LinkComponent, websiteUrl, learnUrl, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
+export declare function Header({ activeApp, user, onLogin, onLogout, profileHref, LinkComponent, websiteUrl, learnUrl, extraNavLinks, }: HeaderProps): import("react/jsx-runtime").JSX.Element;
 export {};

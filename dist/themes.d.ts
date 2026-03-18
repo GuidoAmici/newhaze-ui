@@ -1,7 +1,10 @@
 export interface ThemeColors {
-    bgDark: string;
-    bg: string;
-    bgLight: string;
+    s0: string;
+    s1: string;
+    s2: string;
+    s3: string;
+    shadowSm: string;
+    shadowLg: string;
     text: string;
     textMuted: string;
     textDim: string;
@@ -24,7 +27,7 @@ export interface Theme {
     label: string;
     colors: ThemeColors;
 }
-export type ThemeName = 'new-haze' | 'rabbitek' | 'canahoria' | 'dark-purple' | 'green-botanical' | 'light' | 'dark-orange';
+export type ThemeName = 'new-haze' | 'new-haze-light' | 'rabbitek' | 'rabbitek-light' | 'canahoria' | 'canahoria-dark';
 export declare function resolveThemeName(stored: string | null): ThemeName;
 declare const themes: Record<ThemeName, Theme>;
 export default themes;

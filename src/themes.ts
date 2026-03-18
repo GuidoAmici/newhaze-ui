@@ -1,20 +1,24 @@
 export interface ThemeColors {
-  // ── Backgrounds ───────────────────────────────────────────────────────────
-  bgDark: string
-  bg: string
-  bgLight: string
+  // ── Surface levels (distance = darkness: s0 is always darkest) ────────────
+  s0: string   // page background
+  s1: string   // section container panels
+  s2: string   // cards and sub-panel groups
+  s3: string   // interactive elements inside cards (buttons, inputs)
+  // ── Elevation shadows (inset top highlight + outer bottom drop) ───────────
+  shadowSm: string  // default elevation
+  shadowLg: string  // selected / active state
   // ── Text ──────────────────────────────────────────────────────────────────
   text: string
   textMuted: string
-  textDim: string       // decorative only — fails WCAG AA for body text
+  textDim: string
   // ── Borders ───────────────────────────────────────────────────────────────
   border: string
   borderLight: string
-  // ── Accent (primary brand color — drives CTAs, prices, key highlights) ───
+  // ── Accent ────────────────────────────────────────────────────────────────
   accent: string
   accentBright: string
   accentNeon: string
-  // ── Secondary (second brand color — badges, tags, secondary buttons) ──────
+  // ── Secondary ─────────────────────────────────────────────────────────────
   secondary: string
   secondaryBright: string
   // ── Semantic states ───────────────────────────────────────────────────────
@@ -25,7 +29,7 @@ export interface ThemeColors {
   successBg: string
   successBorder: string
   // ── Accessibility ─────────────────────────────────────────────────────────
-  focus: string         // :focus-visible ring color
+  focus: string
 }
 
 export interface Theme {
@@ -35,21 +39,23 @@ export interface Theme {
 
 export type ThemeName =
   | 'new-haze'
+  | 'new-haze-light'
   | 'rabbitek'
+  | 'rabbitek-light'
   | 'canahoria'
-  | 'dark-purple'
-  | 'green-botanical'
-  | 'light'
-  | 'dark-orange'
+  | 'canahoria-dark'
 
 /** Legacy names that may exist in localStorage */
 const LEGACY_THEME_MAP: Record<string, ThemeName> = {
-  'neon-purple':    'new-haze',
-  'neon-purple-v2': 'new-haze',
-  'light-legacy':   'canahoria',
-  'iamsajid':       'new-haze',
-  'iamsajid-light': 'canahoria',
-  'dark-purple':    'new-haze',
+  'neon-purple':     'new-haze',
+  'neon-purple-v2':  'new-haze',
+  'light-legacy':    'canahoria',
+  'iamsajid':        'new-haze',
+  'iamsajid-light':  'canahoria',
+  'dark-purple':     'new-haze',
+  'green-botanical': 'canahoria-dark',
+  'light':           'new-haze-light',
+  'dark-orange':     'new-haze',
 }
 
 export function resolveThemeName(stored: string | null): ThemeName {
@@ -58,205 +64,136 @@ export function resolveThemeName(stored: string | null): ThemeName {
   return LEGACY_THEME_MAP[stored] ?? 'new-haze'
 }
 
+// ── Shared surface values ──────────────────────────────────────────────────
+// All themes use the same grayscale surfaces during Phase 1 (structure first,
+// color later). Brand colors will replace these in Phase 2.
+
+const DARK_SURFACES = {
+  s0: 'hsl(0, 0%,  4%)',
+  s1: 'hsl(0, 0%,  8%)',
+  s2: 'hsl(0, 0%, 12%)',
+  s3: 'hsl(0, 0%, 16%)',
+  shadowSm: 'inset 0 1px 1px hsla(0,0%,100%,0.07), 0 2px 6px hsla(0,0%,0%,0.55)',
+  shadowLg: 'inset 0 2px 8px hsla(0,0%,100%,0.10), 0 10px 30px hsla(0,0%,0%,0.75)',
+  text:        'hsl(0, 0%, 92%)',
+  textMuted:   'hsl(0, 0%, 60%)',
+  textDim:     'hsl(0, 0%, 32%)',
+  border:      'hsl(0, 0%, 18%)',
+  borderLight: 'hsl(0, 0%, 24%)',
+}
+
+const LIGHT_SURFACES = {
+  s0: 'hsl(0, 0%, 80%)',
+  s1: 'hsl(0, 0%, 88%)',
+  s2: 'hsl(0, 0%, 95%)',
+  s3: 'hsl(0, 0%, 100%)',
+  shadowSm: 'inset 0 1px 2px hsla(0,0%,100%,0.75), 0 2px 4px hsla(0,0%,0%,0.13)',
+  shadowLg: 'inset 0 2px 8px hsla(0,0%,100%,0.90), 0 8px 24px hsla(0,0%,0%,0.20)',
+  text:        'hsl(0, 0%, 10%)',
+  textMuted:   'hsl(0, 0%, 38%)',
+  textDim:     'hsl(0, 0%, 62%)',
+  border:      'hsl(0, 0%, 72%)',
+  borderLight: 'hsl(0, 0%, 80%)',
+}
+
+// ── Placeholder accent (orange) — all themes share this in Phase 1 ─────────
+const ACCENT = {
+  accent:          'hsl(27, 88%, 54%)',
+  accentBright:    'hsl(27, 100%, 61%)',
+  accentNeon:      'hsl(27, 100%, 70%)',
+  secondary:       'hsl(27, 88%, 54%)',
+  secondaryBright: 'hsl(27, 100%, 61%)',
+}
+
 const themes: Record<ThemeName, Theme> = {
-  // ── Brand themes (canonical, image-inspired) ──────────────────────────────
 
-  /**
-   * New Haze — DARK
-   * Deep cyan-midnight backgrounds, orange accent, gummy hot-pink secondary.
-   * Playful, colourful, candy-neon. Inspired by Sticker 1.
-   */
   'new-haze': {
-    label: 'New Haze',
+    label: 'New Haze — Oscuro',
     colors: {
-      bgDark:          '#040e18',
-      bg:              '#071e30',
-      bgLight:         '#0d2840',
-      text:            '#d8f2ff',
-      textMuted:       '#6ab8d0',
-      textDim:         '#285068',
-      border:          '#122840',
-      borderLight:     '#1e3a58',
-      accent:          '#f07820',
-      accentBright:    '#ff9a3c',
-      accentNeon:      '#ffb860',
-      secondary:       '#e8206c',
-      secondaryBright: '#ff4d90',
-      error:           '#ff5060',
-      errorBg:         'rgba(255,60,70,0.10)',
-      errorBorder:     'rgba(255,60,70,0.25)',
-      success:         '#20d8a0',
-      successBg:       'rgba(0,200,140,0.10)',
-      successBorder:   'rgba(0,200,140,0.25)',
-      focus:           '#ff4d90',
+      ...DARK_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 90%, 65%)',
+      errorBg:       'hsla(0, 90%, 65%, 0.10)',
+      errorBorder:   'hsla(0, 90%, 65%, 0.25)',
+      success:       'hsl(150, 70%, 55%)',
+      successBg:     'hsla(150, 70%, 55%, 0.10)',
+      successBorder: 'hsla(150, 70%, 55%, 0.25)',
+      focus:         'hsl(27, 100%, 61%)',
     },
   },
 
-  /**
-   * Rabbitek — DARK
-   * Near-pitch-black background, golden-carrot orange accent, aqua-green secondary.
-   * Serious, authoritative, impactful. Inspired by Sticker 2.
-   */
+  'new-haze-light': {
+    label: 'New Haze — Claro',
+    colors: {
+      ...LIGHT_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 75%, 45%)',
+      errorBg:       'hsla(0, 75%, 45%, 0.08)',
+      errorBorder:   'hsla(0, 75%, 45%, 0.20)',
+      success:       'hsl(150, 65%, 35%)',
+      successBg:     'hsla(150, 65%, 35%, 0.08)',
+      successBorder: 'hsla(150, 65%, 35%, 0.20)',
+      focus:         'hsl(27, 88%, 54%)',
+    },
+  },
+
   'rabbitek': {
-    label: 'Rabbitek',
+    label: 'Rabbitek — Oscuro',
     colors: {
-      bgDark:          '#040308',
-      bg:              '#080612',
-      bgLight:         '#0e0c1e',
-      text:            '#f0e8d0',
-      textMuted:       '#9a7a4a',
-      textDim:         '#5a4830',
-      border:          '#18120a',
-      borderLight:     '#241a0c',
-      accent:          '#c87800',
-      accentBright:    '#e89a00',
-      accentNeon:      '#ffc020',
-      secondary:       '#00a87c',
-      secondaryBright: '#00c896',
-      error:           '#ff7060',
-      errorBg:         'rgba(220,60,40,0.10)',
-      errorBorder:     'rgba(220,60,40,0.25)',
-      success:         '#00c89a',
-      successBg:       'rgba(0,180,140,0.10)',
-      successBorder:   'rgba(0,180,140,0.25)',
-      focus:           '#ffc020',
+      ...DARK_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 90%, 65%)',
+      errorBg:       'hsla(0, 90%, 65%, 0.10)',
+      errorBorder:   'hsla(0, 90%, 65%, 0.25)',
+      success:       'hsl(150, 70%, 55%)',
+      successBg:     'hsla(150, 70%, 55%, 0.10)',
+      successBorder: 'hsla(150, 70%, 55%, 0.25)',
+      focus:         'hsl(27, 100%, 61%)',
     },
   },
 
-  /**
-   * Canahoria — LIGHT
-   * Warm cream/beige backgrounds, carrot orange accent, leafy dark green secondary.
-   * Relaxed, earthy, well-established. Inspired by Sticker 3.
-   */
+  'rabbitek-light': {
+    label: 'Rabbitek — Claro',
+    colors: {
+      ...LIGHT_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 75%, 45%)',
+      errorBg:       'hsla(0, 75%, 45%, 0.08)',
+      errorBorder:   'hsla(0, 75%, 45%, 0.20)',
+      success:       'hsl(150, 65%, 35%)',
+      successBg:     'hsla(150, 65%, 35%, 0.08)',
+      successBorder: 'hsla(150, 65%, 35%, 0.20)',
+      focus:         'hsl(27, 88%, 54%)',
+    },
+  },
+
   'canahoria': {
-    label: 'Canahoria',
+    label: 'Canahoria — Claro',
     colors: {
-      bgDark:          '#e0d2b8',
-      bg:              '#f5eedc',
-      bgLight:         '#fdfaf4',
-      text:            '#2a1c0c',
-      textMuted:       '#6a5030',
-      textDim:         '#8a6848',
-      border:          '#d8c4a0',
-      borderLight:     '#e8d8b8',
-      accent:          '#d86010',
-      accentBright:    '#f07828',
-      accentNeon:      '#ff9840',
-      secondary:       '#2a5c18',
-      secondaryBright: '#3a7828',
-      error:           '#c22c00',
-      errorBg:         'rgba(194,44,0,0.07)',
-      errorBorder:     'rgba(194,44,0,0.18)',
-      success:         '#2a5c18',
-      successBg:       'rgba(42,92,28,0.08)',
-      successBorder:   'rgba(42,92,28,0.20)',
-      focus:           '#d86010',
+      ...LIGHT_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 75%, 45%)',
+      errorBg:       'hsla(0, 75%, 45%, 0.08)',
+      errorBorder:   'hsla(0, 75%, 45%, 0.20)',
+      success:       'hsl(150, 65%, 35%)',
+      successBg:     'hsla(150, 65%, 35%, 0.08)',
+      successBorder: 'hsla(150, 65%, 35%, 0.20)',
+      focus:         'hsl(27, 88%, 54%)',
     },
   },
 
-  // ── Extended themes (secondary = accentBright as placeholder) ─────────────
-
-  'dark-purple': {
-    label: 'Púrpura Oscuro',
+  'canahoria-dark': {
+    label: 'Canahoria — Oscuro',
     colors: {
-      bgDark:          '#0b0810',
-      bg:              '#120d1a',
-      bgLight:         '#1a1228',
-      text:            '#e8d4f8',
-      textMuted:       '#9a7abf',
-      textDim:         '#5a4078',
-      border:          '#2d1f48',
-      borderLight:     '#3d2a60',
-      accent:          '#6b3fa0',
-      accentBright:    '#9b6fd4',
-      accentNeon:      '#c8a8ff',
-      secondary:       '#9b6fd4',
-      secondaryBright: '#c8a8ff',
-      error:           '#f87171',
-      errorBg:         'rgba(220,38,38,0.10)',
-      errorBorder:     'rgba(220,38,38,0.25)',
-      success:         '#4ade80',
-      successBg:       'rgba(22,163,74,0.10)',
-      successBorder:   'rgba(22,163,74,0.25)',
-      focus:           '#c8a8ff',
-    },
-  },
-
-  'green-botanical': {
-    label: 'Verde Botánico',
-    colors: {
-      bgDark:          '#0a1a0e',
-      bg:              '#0f2515',
-      bgLight:         '#15301d',
-      text:            '#e8f5e9',
-      textMuted:       '#a5d6a7',
-      textDim:         '#6b9a6e',
-      border:          '#1e402a',
-      borderLight:     '#2a5036',
-      accent:          '#2e7d32',
-      accentBright:    '#4caf50',
-      accentNeon:      '#81c784',
-      secondary:       '#4caf50',
-      secondaryBright: '#81c784',
-      error:           '#f87171',
-      errorBg:         'rgba(220,38,38,0.10)',
-      errorBorder:     'rgba(220,38,38,0.25)',
-      success:         '#4ade80',
-      successBg:       'rgba(22,163,74,0.10)',
-      successBorder:   'rgba(22,163,74,0.25)',
-      focus:           '#81c784',
-    },
-  },
-
-  'light': {
-    label: 'Claro',
-    colors: {
-      bgDark:          '#e8eaed',
-      bg:              '#f8f9fa',
-      bgLight:         '#ffffff',
-      text:            '#1a1a2e',
-      textMuted:       '#6b7280',
-      textDim:         '#6b7280',
-      border:          '#e5e7eb',
-      borderLight:     '#d1d5db',
-      accent:          '#7c3aed',
-      accentBright:    '#8b5cf6',
-      accentNeon:      '#a78bfa',
-      secondary:       '#8b5cf6',
-      secondaryBright: '#a78bfa',
-      error:           '#dc2626',
-      errorBg:         'rgba(220,38,38,0.07)',
-      errorBorder:     'rgba(220,38,38,0.20)',
-      success:         '#16a34a',
-      successBg:       'rgba(22,163,74,0.07)',
-      successBorder:   'rgba(22,163,74,0.20)',
-      focus:           '#7c3aed',
-    },
-  },
-
-  'dark-orange': {
-    label: 'Naranja Oscuro',
-    colors: {
-      bgDark:          '#080810',
-      bg:              '#0e0e1c',
-      bgLight:         '#161628',
-      text:            '#f5f0e0',
-      textMuted:       '#b8a888',
-      textDim:         '#6a5a40',
-      border:          '#1e1e38',
-      borderLight:     '#2e2e50',
-      accent:          '#ff6b00',
-      accentBright:    '#ff9a3c',
-      accentNeon:      '#ffcc00',
-      secondary:       '#ff9a3c',
-      secondaryBright: '#ffcc00',
-      error:           '#f87171',
-      errorBg:         'rgba(220,38,38,0.10)',
-      errorBorder:     'rgba(220,38,38,0.25)',
-      success:         '#4ade80',
-      successBg:       'rgba(22,163,74,0.10)',
-      successBorder:   'rgba(22,163,74,0.25)',
-      focus:           '#ffcc00',
+      ...DARK_SURFACES,
+      ...ACCENT,
+      error:         'hsl(0, 90%, 65%)',
+      errorBg:       'hsla(0, 90%, 65%, 0.10)',
+      errorBorder:   'hsla(0, 90%, 65%, 0.25)',
+      success:       'hsl(150, 70%, 55%)',
+      successBg:     'hsla(150, 70%, 55%, 0.10)',
+      successBorder: 'hsla(150, 70%, 55%, 0.25)',
+      focus:         'hsl(27, 100%, 61%)',
     },
   },
 

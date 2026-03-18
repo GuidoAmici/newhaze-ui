@@ -9,7 +9,7 @@ export interface FeatureCardProps {
   icon: React.ReactNode
   title: string
   description: string
-  iconVariant?: 'accent' | 'accent-bright' | 'success'
+  iconVariant?: 'accent' | 'accent-bright' | 'secondary' | 'success'
 }
 
 export function FeatureCard({ icon, title, description, iconVariant = 'accent' }: FeatureCardProps) {
@@ -17,6 +17,8 @@ export function FeatureCard({ icon, title, description, iconVariant = 'accent' }
   const iconBg =
     iconVariant === 'accent-bright'
       ? theme.accentBright
+      : iconVariant === 'secondary'
+      ? theme.secondary
       : iconVariant === 'success'
       ? theme.success
       : theme.accent
