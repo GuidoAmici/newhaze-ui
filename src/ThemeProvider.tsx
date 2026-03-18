@@ -192,7 +192,30 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--nh-success-border',colors.successBorder)
   root.style.setProperty('--nh-focus',         colors.focus)
 
-  // CSS classes (for Tailwind dark: variant + website globals.css)
+  // ── shadcn token bridge ───────────────────────────────────────────────────
+  // Maps shadcn's CSS variables to nh tokens so every shadcn component
+  // automatically inherits the active theme without any extra config.
+  root.style.setProperty('--background',            colors.s1)
+  root.style.setProperty('--foreground',            colors.text)
+  root.style.setProperty('--card',                  colors.s2)
+  root.style.setProperty('--card-foreground',       colors.text)
+  root.style.setProperty('--popover',               colors.s2)
+  root.style.setProperty('--popover-foreground',    colors.text)
+  root.style.setProperty('--primary',               colors.accent)
+  root.style.setProperty('--primary-foreground',    'white')
+  root.style.setProperty('--secondary',             colors.s3)
+  root.style.setProperty('--secondary-foreground',  colors.text)
+  root.style.setProperty('--muted',                 colors.s3)
+  root.style.setProperty('--muted-foreground',      colors.textMuted)
+  root.style.setProperty('--accent',                colors.s3)
+  root.style.setProperty('--accent-foreground',     colors.text)
+  root.style.setProperty('--destructive',           colors.error)
+  root.style.setProperty('--destructive-foreground','white')
+  root.style.setProperty('--border',                colors.border)
+  root.style.setProperty('--input',                 colors.s3)
+  root.style.setProperty('--ring',                  colors.focus)
+
+  // CSS classes (for Tailwind dark: variant)
   root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'light')
   HTML_CLASSES[name].forEach(c => root.classList.add(c))
   root.style.colorScheme = COLOR_SCHEME[name]
