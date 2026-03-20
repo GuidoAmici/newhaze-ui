@@ -1,7 +1,14 @@
 "use client";
-import { jsx as e, jsxs as s, Fragment as F } from "react/jsx-runtime";
-import { createContext as Be, useState as m, useMemo as de, useEffect as P, useContext as Me, useRef as ee, useCallback as Pe } from "react";
-const Ee = {
+import { jsx as e, jsxs as s, Fragment as $ } from "react/jsx-runtime";
+import { createContext as ze, useState as m, useMemo as le, useEffect as P, useContext as Be, useRef as X, useCallback as Me } from "react";
+const Pe = {
+  "new-haze": { classes: ["dark", "new-haze"], colorScheme: "dark" },
+  "new-haze-light": { classes: ["new-haze"], colorScheme: "light" },
+  rabbitek: { classes: ["dark", "rabbitek"], colorScheme: "dark" },
+  "rabbitek-light": { classes: ["rabbitek"], colorScheme: "light" },
+  canahoria: { classes: ["canahoria"], colorScheme: "light" },
+  "canahoria-dark": { classes: ["dark", "canahoria"], colorScheme: "dark" }
+}, Ee = {
   "neon-purple": "new-haze",
   "neon-purple-v2": "new-haze",
   "light-legacy": "canahoria",
@@ -13,9 +20,9 @@ const Ee = {
   "dark-orange": "new-haze"
 };
 function Te(r) {
-  return r ? r in U ? r : Ee[r] ?? "new-haze" : "new-haze";
+  return r ? r in H ? r : Ee[r] ?? "new-haze" : "new-haze";
 }
-const X = {
+const Re = {
   s0: "hsl(0, 0%,  4%)",
   s1: "hsl(0, 0%,  8%)",
   s2: "hsl(0, 0%, 12%)",
@@ -27,10 +34,10 @@ const X = {
   textDim: "hsl(0, 0%, 32%)",
   border: "hsl(0, 0%, 18%)",
   borderLight: "hsl(0, 0%, 24%)"
-}, Q = {
-  s0: "hsl(0, 0%, 80%)",
-  s1: "hsl(0, 0%, 88%)",
-  s2: "hsl(0, 0%, 95%)",
+}, ce = {
+  s0: "hsl(0, 0%, 88%)",
+  s1: "hsl(0, 0%, 92%)",
+  s2: "hsl(0, 0%, 96%)",
   s3: "hsl(0, 0%, 100%)",
   shadowSm: "inset 0 1px 2px hsla(0,0%,100%,0.75), 0 2px 4px hsla(0,0%,0%,0.13)",
   shadowLg: "inset 0 2px 8px hsla(0,0%,100%,0.90), 0 8px 24px hsla(0,0%,0%,0.20)",
@@ -39,32 +46,47 @@ const X = {
   textDim: "hsl(0, 0%, 62%)",
   border: "hsl(0, 0%, 72%)",
   borderLight: "hsl(0, 0%, 80%)"
-}, N = {
+}, J = {
   accent: "hsl(27, 88%, 54%)",
   accentBright: "hsl(27, 100%, 61%)",
   accentNeon: "hsl(27, 100%, 70%)",
   secondary: "hsl(27, 88%, 54%)",
   secondaryBright: "hsl(27, 100%, 61%)"
-}, U = {
+}, H = {
+  // ── New Haze — midnight blue, aqua, gummy pink ─────────────────────────────
   "new-haze": {
     label: "New Haze — Oscuro",
     colors: {
-      ...X,
-      ...N,
+      s0: "oklch(0.09 0.04 226)",
+      s1: "oklch(0.11 0.04 225)",
+      s2: "oklch(0.14 0.05 222)",
+      s3: "oklch(0.19 0.05 220)",
+      shadowSm: "inset 0 1px 1px hsla(205,60%,100%,0.06), 0 2px 6px hsla(210,60%,5%,0.60)",
+      shadowLg: "inset 0 2px 8px hsla(205,60%,100%,0.09), 0 10px 30px hsla(210,60%,5%,0.80)",
+      text: "oklch(0.94 0.03 210)",
+      textMuted: "oklch(0.60 0.08 210)",
+      textDim: "oklch(0.38 0.06 215)",
+      border: "oklch(0.22 0.06 220)",
+      borderLight: "oklch(0.28 0.05 220)",
+      accent: "#00b8d4",
+      accentBright: "#20d4f0",
+      accentNeon: "#70eeff",
+      secondary: "#ff4d9e",
+      secondaryBright: "#ff80c0",
       error: "hsl(0, 90%, 65%)",
       errorBg: "hsla(0, 90%, 65%, 0.10)",
       errorBorder: "hsla(0, 90%, 65%, 0.25)",
       success: "hsl(150, 70%, 55%)",
       successBg: "hsla(150, 70%, 55%, 0.10)",
       successBorder: "hsla(150, 70%, 55%, 0.25)",
-      focus: "hsl(27, 100%, 61%)"
+      focus: "#00b8d4"
     }
   },
   "new-haze-light": {
     label: "New Haze — Claro",
     colors: {
-      ...Q,
-      ...N,
+      ...ce,
+      ...J,
       error: "hsl(0, 75%, 45%)",
       errorBg: "hsla(0, 75%, 45%, 0.08)",
       errorBorder: "hsla(0, 75%, 45%, 0.20)",
@@ -74,25 +96,40 @@ const X = {
       focus: "hsl(27, 88%, 54%)"
     }
   },
+  // ── Rabbitek — near-black, golden orange, aqua ─────────────────────────────
   rabbitek: {
     label: "Rabbitek — Oscuro",
     colors: {
-      ...X,
-      ...N,
+      s0: "oklch(0.05 0.02 285)",
+      s1: "oklch(0.07 0.02 285)",
+      s2: "oklch(0.10 0.02 282)",
+      s3: "oklch(0.13 0.02 280)",
+      shadowSm: "inset 0 1px 1px hsla(280,30%,100%,0.05), 0 2px 6px hsla(280,30%,3%,0.65)",
+      shadowLg: "inset 0 2px 8px hsla(280,30%,100%,0.08), 0 10px 30px hsla(280,30%,3%,0.85)",
+      text: "oklch(0.93 0.04 82)",
+      textMuted: "oklch(0.60 0.07 75)",
+      textDim: "oklch(0.38 0.04 78)",
+      border: "oklch(0.16 0.04 68)",
+      borderLight: "oklch(0.21 0.04 68)",
+      accent: "#c87800",
+      accentBright: "#e89a00",
+      accentNeon: "#ffc830",
+      secondary: "#00b090",
+      secondaryBright: "#20d0b0",
       error: "hsl(0, 90%, 65%)",
       errorBg: "hsla(0, 90%, 65%, 0.10)",
       errorBorder: "hsla(0, 90%, 65%, 0.25)",
       success: "hsl(150, 70%, 55%)",
       successBg: "hsla(150, 70%, 55%, 0.10)",
       successBorder: "hsla(150, 70%, 55%, 0.25)",
-      focus: "hsl(27, 100%, 61%)"
+      focus: "#c87800"
     }
   },
   "rabbitek-light": {
     label: "Rabbitek — Claro",
     colors: {
-      ...Q,
-      ...N,
+      ...ce,
+      ...J,
       error: "hsl(0, 75%, 45%)",
       errorBg: "hsla(0, 75%, 45%, 0.08)",
       errorBorder: "hsla(0, 75%, 45%, 0.20)",
@@ -102,25 +139,40 @@ const X = {
       focus: "hsl(27, 88%, 54%)"
     }
   },
+  // ── Canahoria — warm beige, leafy green, carrot orange ─────────────────────
   canahoria: {
     label: "Canahoria — Claro",
     colors: {
-      ...Q,
-      ...N,
+      s0: "oklch(0.92 0.03 80)",
+      s1: "oklch(0.94 0.025 81)",
+      s2: "oklch(0.97 0.015 81)",
+      s3: "oklch(0.99 0.01 80)",
+      shadowSm: "inset 0 1px 2px hsla(80,60%,100%,0.80), 0 2px 4px hsla(32,70%,30%,0.12)",
+      shadowLg: "inset 0 2px 8px hsla(80,60%,100%,0.90), 0 8px 24px hsla(32,70%,30%,0.18)",
+      text: "oklch(0.22 0.04 62)",
+      textMuted: "oklch(0.48 0.05 68)",
+      textDim: "oklch(0.65 0.04 70)",
+      border: "oklch(0.86 0.03 78)",
+      borderLight: "oklch(0.90 0.025 79)",
+      accent: "#2a5c1c",
+      accentBright: "#3a7828",
+      accentNeon: "#4e9835",
+      secondary: "#d95808",
+      secondaryBright: "#f07030",
       error: "hsl(0, 75%, 45%)",
       errorBg: "hsla(0, 75%, 45%, 0.08)",
       errorBorder: "hsla(0, 75%, 45%, 0.20)",
       success: "hsl(150, 65%, 35%)",
       successBg: "hsla(150, 65%, 35%, 0.08)",
       successBorder: "hsla(150, 65%, 35%, 0.20)",
-      focus: "hsl(27, 88%, 54%)"
+      focus: "#2a5c1c"
     }
   },
   "canahoria-dark": {
     label: "Canahoria — Oscuro",
     colors: {
-      ...X,
-      ...N,
+      ...Re,
+      ...J,
       error: "hsl(0, 90%, 65%)",
       errorBg: "hsla(0, 90%, 65%, 0.10)",
       errorBorder: "hsla(0, 90%, 65%, 0.25)",
@@ -130,7 +182,7 @@ const X = {
       focus: "hsl(27, 100%, 61%)"
     }
   }
-}, he = "nh_theme", pe = "new-haze", Re = `
+}, de = "nh_theme", he = "new-haze", Ne = `
 /* ── Spacing ─────────────────────────── */
 :root {
   --nh-space-0:  0px;
@@ -235,63 +287,51 @@ const X = {
   }
 }
 `;
-let ue = !1;
-function $e() {
-  if (ue || typeof document > "u") return;
+let pe = !1;
+function De() {
+  if (pe || typeof document > "u") return;
   const r = document.createElement("style");
-  r.setAttribute("data-nh", "static"), r.textContent = Re, document.head.appendChild(r), ue = !0;
+  r.setAttribute("data-nh", "static"), r.textContent = Ne, document.head.appendChild(r), pe = !0;
 }
-const be = Be(null), De = {
-  "new-haze": ["dark", "new-haze"],
-  "new-haze-light": ["new-haze"],
-  rabbitek: ["dark", "rabbitek"],
-  "rabbitek-light": ["rabbitek"],
-  canahoria: ["canahoria"],
-  "canahoria-dark": ["dark", "canahoria"]
-}, Ne = {
-  "new-haze": "dark",
-  "new-haze-light": "light",
-  rabbitek: "dark",
-  "rabbitek-light": "light",
-  canahoria: "light",
-  "canahoria-dark": "dark"
-};
-function Fe(r, t) {
+const me = ze(null);
+function $e(r, t) {
   const n = document.documentElement;
-  n.style.setProperty("--nh-s0", t.s0), n.style.setProperty("--nh-s1", t.s1), n.style.setProperty("--nh-s2", t.s2), n.style.setProperty("--nh-s3", t.s3), n.style.setProperty("--nh-shadow-sm", t.shadowSm), n.style.setProperty("--nh-shadow-lg", t.shadowLg), n.style.setProperty("--nh-bg-dark", t.s0), n.style.setProperty("--nh-bg", t.s1), n.style.setProperty("--nh-bg-light", t.s2), n.style.setProperty("--nh-text", t.text), n.style.setProperty("--nh-text-muted", t.textMuted), n.style.setProperty("--nh-text-dim", t.textDim), n.style.setProperty("--nh-border", t.border), n.style.setProperty("--nh-border-light", t.borderLight), n.style.setProperty("--nh-accent", t.accent), n.style.setProperty("--nh-accent-bright", t.accentBright), n.style.setProperty("--nh-accent-neon", t.accentNeon), n.style.setProperty("--nh-secondary", t.secondary), n.style.setProperty("--nh-secondary-bright", t.secondaryBright), n.style.setProperty("--nh-error", t.error), n.style.setProperty("--nh-error-bg", t.errorBg), n.style.setProperty("--nh-error-border", t.errorBorder), n.style.setProperty("--nh-success", t.success), n.style.setProperty("--nh-success-bg", t.successBg), n.style.setProperty("--nh-success-border", t.successBorder), n.style.setProperty("--nh-focus", t.focus), n.style.setProperty("--background", t.s1), n.style.setProperty("--foreground", t.text), n.style.setProperty("--card", t.s2), n.style.setProperty("--card-foreground", t.text), n.style.setProperty("--popover", t.s2), n.style.setProperty("--popover-foreground", t.text), n.style.setProperty("--primary", t.accent), n.style.setProperty("--primary-foreground", "white"), n.style.setProperty("--secondary", t.s3), n.style.setProperty("--secondary-foreground", t.text), n.style.setProperty("--muted", t.s3), n.style.setProperty("--muted-foreground", t.textMuted), n.style.setProperty("--accent", t.s3), n.style.setProperty("--accent-foreground", t.text), n.style.setProperty("--destructive", t.error), n.style.setProperty("--destructive-foreground", "white"), n.style.setProperty("--border", t.border), n.style.setProperty("--input", t.s3), n.style.setProperty("--ring", t.focus), n.classList.remove("dark", "new-haze", "rabbitek", "canahoria", "light"), De[r].forEach((i) => n.classList.add(i)), n.style.colorScheme = Ne[r];
+  n.style.setProperty("--nh-s0", t.s0), n.style.setProperty("--nh-s1", t.s1), n.style.setProperty("--nh-s2", t.s2), n.style.setProperty("--nh-s3", t.s3), n.style.setProperty("--nh-shadow-sm", t.shadowSm), n.style.setProperty("--nh-shadow-lg", t.shadowLg), n.style.setProperty("--nh-bg-dark", t.s0), n.style.setProperty("--nh-bg", t.s1), n.style.setProperty("--nh-bg-light", t.s2), n.style.setProperty("--nh-text", t.text), n.style.setProperty("--nh-text-muted", t.textMuted), n.style.setProperty("--nh-text-dim", t.textDim), n.style.setProperty("--nh-border", t.border), n.style.setProperty("--nh-border-light", t.borderLight), n.style.setProperty("--nh-accent", t.accent), n.style.setProperty("--nh-accent-bright", t.accentBright), n.style.setProperty("--nh-accent-neon", t.accentNeon), n.style.setProperty("--nh-secondary", t.secondary), n.style.setProperty("--nh-secondary-bright", t.secondaryBright), n.style.setProperty("--nh-error", t.error), n.style.setProperty("--nh-error-bg", t.errorBg), n.style.setProperty("--nh-error-border", t.errorBorder), n.style.setProperty("--nh-success", t.success), n.style.setProperty("--nh-success-bg", t.successBg), n.style.setProperty("--nh-success-border", t.successBorder), n.style.setProperty("--nh-focus", t.focus), n.style.setProperty("--background", t.s1), n.style.setProperty("--foreground", t.text), n.style.setProperty("--card", t.s2), n.style.setProperty("--card-foreground", t.text), n.style.setProperty("--popover", t.s2), n.style.setProperty("--popover-foreground", t.text), n.style.setProperty("--primary", t.accent), n.style.setProperty("--primary-foreground", "white"), n.style.setProperty("--secondary", t.s3), n.style.setProperty("--secondary-foreground", t.text), n.style.setProperty("--muted", t.s3), n.style.setProperty("--muted-foreground", t.textMuted), n.style.setProperty("--accent", t.s3), n.style.setProperty("--accent-foreground", t.text), n.style.setProperty("--destructive", t.error), n.style.setProperty("--destructive-foreground", "white"), n.style.setProperty("--border", t.border), n.style.setProperty("--input", t.s3), n.style.setProperty("--ring", t.focus);
+  const i = Pe[r];
+  n.classList.remove("dark", "new-haze", "rabbitek", "canahoria", "light"), i.classes.forEach((a) => n.classList.add(a)), n.style.colorScheme = i.colorScheme;
 }
-function yt({ children: r }) {
-  const [t, n] = m(pe), i = de(() => U[t].colors, [t]);
+function gt({ children: r }) {
+  const [t, n] = m(he), i = le(() => H[t].colors, [t]);
   P(() => {
     try {
-      const h = Te(localStorage.getItem(he));
-      h !== pe && n(h);
+      const h = Te(localStorage.getItem(de));
+      h !== he && n(h);
     } catch {
     }
   }, []), P(() => {
-    $e(), Fe(t, i);
+    De(), $e(t, i);
   }, [t, i]);
   const a = (h) => {
-    if (h in U) {
+    if (h in H) {
       n(h);
       try {
-        localStorage.setItem(he, h);
+        localStorage.setItem(de, h);
       } catch {
       }
     }
-  }, c = de(
-    () => Object.entries(U).map(([h, { label: p }]) => ({ value: h, label: p })),
+  }, c = le(
+    () => Object.entries(H).map(([h, { label: p }]) => ({ value: h, label: p })),
     []
   );
-  return /* @__PURE__ */ e(be.Provider, { value: { theme: i, themeName: t, setThemeName: a, themeOptions: c }, children: r });
+  return /* @__PURE__ */ e(me.Provider, { value: { theme: i, themeName: t, setThemeName: a, themeOptions: c }, children: r });
 }
 function v() {
-  const r = Me(be);
+  const r = Be(me);
   if (!r) throw new Error("useTheme must be used within ThemeProvider");
   return r;
 }
-function ge({ color: r, accentColor: t }) {
-  return /* @__PURE__ */ s(F, { children: [
+function ue({ color: r, accentColor: t }) {
+  return /* @__PURE__ */ s($, { children: [
     /* @__PURE__ */ e("circle", { fill: t, cx: "540", cy: "540", r: "500" }),
     /* @__PURE__ */ e("path", { fill: r, d: "M708.29,500.15v142.18c0,98.59-80.59,175.83-178.98,169.66-42.21-2.65-80.2-20.85-108.31-48.96-30.45-30.45-49.29-72.52-49.29-119v-143.88c0-5.52,4.48-10,10-10h100.18c-.58.33-1.16.67-1.72,1.01-.98.59-1.95,1.21-2.88,1.85-.5.33-.98.65-1.45.99-.77.54-1.52,1.09-2.25,1.66-.07.05-.14.1-.2.16-.64.5-1.28,1-1.91,1.52-.03.02-.05.04-.07.06-.26.21-.52.43-.77.66-.33.26-.65.54-.97.82-.02.03-.05.05-.07.06-.05.04-.09.08-.13.11-.09.08-.19.17-.29.26-.52.46-1.03.93-1.54,1.41-.02.02-.04.04-.06.06-.62.58-1.23,1.18-1.83,1.79-.6.59-1.19,1.19-1.77,1.81-.59.64-1.18,1.28-1.76,1.93-.58.66-1.15,1.33-1.72,2-.56.68-1.12,1.37-1.67,2.07h-.01c-4.04,5.13-7.72,10.85-11.13,17.11-3.42,6.27-5.54,14.07-6.81,23.11-.02.2-.05.41-.08.61,0,.03,0,.05-.01.08-.33,3.62,1.34,5.3,4.89,5.07.25-.02.5-.07.76-.16,12.51-4.22,25.29-6.93,38.33-8.91,4.04-.53,5.04,5.27,1.18,6.89-14.46,4.22-28.76,8.97-42.07,16.12-.16.08-.31.19-.45.31-2.73,2.23-4.21,5.77-4.23,10.88v.24c.01,5.28.11,10.78.25,16.45.18,7.25,1.16,14.45,2.34,21.58,1.27,7.69,2.93,15.28,4.99,22.76,1.22,3.97,3.27,6.18,6.08,6.7,23.82,5.65,46.91,13.55,71,18.08,1.75.31,3.16,2.03,3.23,3.96.09,2.55.12,3.83.22,6.36.07,1.93-1.19,3.4-2.86,3.35-22.54-2.36-43.91-8.36-65.83-13.92-2.61-.81-3.21.69-1.73,4.4h0s.01.02.01.02c6.44,15.07,14.52,29.43,24.09,42.75.05.08.11.16.16.23.13.2.27.38.41.56.14.21.28.4.43.59.24.33.48.65.71.96,6.63,9.04,13.95,17.56,21.92,25.51,6.19,6.24,12.17,11.55,18.53,15.08h0c1.59.88,3.21,1.65,4.86,2.3.66.26,1.33.49,1.99.71.68.21,1.36.42,2.04.59,1.02.26,2.06.47,3.12.64,1.61.25,3.26.37,4.95.37s3.32-.12,4.92-.37c1.06-.17,2.09-.38,3.12-.64.34-.09.68-.18,1.02-.28.34-.1.68-.2,1.01-.31.67-.22,1.34-.45,1.99-.71h.01c1-.4,1.96-.82,2.93-1.3h.01c.64-.32,1.28-.65,1.91-1,.65-.35,1.28-.72,1.91-1.11,5.65-3.5,11.05-8.35,16.62-13.97,19.36-19.31,34.99-42.13,46.14-66.99,1.02-2.82.33-3.85-2-3.04-18.54,3.92-37.01,7.6-55.93,8.84-1.59.12-2.73-1.25-2.62-3.14.21-3.39.31-5.09.5-8.51.11-1.89,1.5-3.65,3.2-4.07,21.45-6.66,42.36-14.76,63.92-21.12,2.66-.41,4.58-2.23,5.69-5.52.01-.03.01-.04.01-.07,1.58-6.16,2.88-12.4,3.92-18.69,1.17-7.13,2.16-14.33,2.34-21.58.02-.94.05-1.88.06-2.82-.06-.46-.15-.89-.25-1.3-16.32-.13-32.68-.4-48.96-.89-19.82-.6-39.76-2.32-58.97-7.42-1.85-.5-2.89-1.72-3.26-3.14-1.65-2.19-1.13-6.23,2-7,32.56-8.01,32.06-8.42,102.01-17.75.14,0,2.23.01,2.36,0,2.07-.14,3.49-.65,4.26-1.5-.48-4.89-1.16-9.46-2.1-13.69-1.14-5.13-2.65-9.75-4.67-13.78-.23-.52-.46-1-.69-1.4-.51-.95-1.04-1.89-1.56-2.8-3.94-6.88-8.24-13.05-13.04-18.46-.19-.21-.36-.41-.54-.6-.63-.7-1.27-1.38-1.93-2.06-.31-.33-.61-.64-.92-.95-.3-.3-.6-.59-.89-.87-.28-.29-.57-.56-.86-.83-.28-.28-.56-.53-.83-.78s-.53-.49-.79-.72c-3.95-3.53-8.21-6.63-12.83-9.27h99.95c5.53,0,10,4.48,10,10Z" }),
     /* @__PURE__ */ e("path", { fill: r, d: "M565.01,350.13c0,35.82-13.84,66.59-20.93,80-1.74,3.28-6.43,3.28-8.16,0-7.09-13.41-20.93-44.18-20.93-80s13.84-66.59,20.93-80c1.74-3.28,6.43-3.28,8.16,0,7.09,13.41,20.93,44.18,20.93,80Z" }),
@@ -303,8 +343,8 @@ function ge({ color: r, accentColor: t }) {
     /* @__PURE__ */ e("path", { fill: r, d: "M519.6,456.51c6.32-6.32,14.2-9.31,17.81-10.43.89-.27,1.71.56,1.44,1.44-1.12,3.62-4.11,11.49-10.43,17.81s-14.2,9.31-17.81,10.43c-.89.27-1.71-.56-1.44-1.44,1.12-3.62,4.11-11.49,10.43-17.81Z" })
   ] });
 }
-function ye({ color: r }) {
-  return /* @__PURE__ */ s(F, { children: [
+function ge({ color: r }) {
+  return /* @__PURE__ */ s($, { children: [
     /* @__PURE__ */ e("path", { fill: r, d: "M48.93,213.77c-3.1-.12-4.64-1.43-4.64-3.93l-4.28-136.04c0-2.5,1.67-3.81,5-3.93h40.35c2.02.36,3.57,2.03,4.64,5l20.35,91.77,3.21-92.84c0-2.5,1.54-3.81,4.64-3.93h40.35c3.33.12,5,1.43,5,3.93l-4.28,136.04c0,2.5-1.55,3.81-4.64,3.93h-41.96c-3.69,0-6.13-1.19-7.32-3.57l-12.5-34.28,2.14,32.85c-.48,3.21-2.38,4.88-5.71,5h-40.35Z" }),
     /* @__PURE__ */ e("path", { fill: r, d: "M194.25,213.77c-9.76.36-15.59-3.21-17.5-10.71l-3.21-102.84c.12-7.26,2.68-14.19,7.68-20.8,5-6.61,11.01-9.79,18.03-9.55h69.27c7.02-.24,13.03,2.95,18.03,9.55s7.56,13.54,7.68,20.8l-1.07,35.71c-.12,2.62-1.55,3.93-4.28,3.93h-42.13c-3.1-.12-4.64-1.43-4.64-3.93l.36-7.14c.36-7.97-1.07-12.59-4.28-13.84s-6.43-1.25-9.64,0-4.64,5.86-4.28,13.84l.54,18.57h32.31c2.5,0,3.93,1.55,4.28,4.64v10.71c0,3.45-1.19,5.24-3.57,5.36h-32.31l.54,20.71c.83,2.86,2.5,4.64,5,5.36h4.64c2.5-.71,4.16-2.5,5-5.36l.36-11.07c0-2.5,1.54-3.81,4.64-3.93h40.71c3.33.12,5,1.43,5,3.93l-.71,25.35c-1.91,7.5-7.74,11.07-17.5,10.71h-78.91Z" }),
     /* @__PURE__ */ e("path", { fill: r, d: "M447.77,213.77h-42.49c-5.24-.12-9.7-1.79-13.39-5-2.5-2.26-6.31-11.6-11.43-28.03-5.12,16.43-8.93,25.77-11.43,28.03-3.69,3.21-8.15,4.88-13.39,5h-42.49c-3.1-.12-4.64-1.43-4.64-3.93l-4.28-136.04c0-2.5,1.67-3.81,5-3.93h40.35c3.09.12,4.64,1.43,4.64,3.93l2.5,76.06,14.28-57.49c2.02-2.97,5.18-4.46,9.46-4.46s7.44,1.49,9.46,4.46l14.28,57.49,2.5-76.06c0-2.5,1.54-3.81,4.64-3.93h40.35c3.33.12,5,1.43,5,3.93l-4.28,136.04c0,2.5-1.55,3.81-4.64,3.93Z" }),
@@ -314,7 +354,7 @@ function ye({ color: r }) {
     /* @__PURE__ */ e("path", { fill: r, d: "M940.02,213.77c-9.76.36-15.59-3.21-17.5-10.71l-3.21-102.84c.12-7.26,2.68-14.19,7.68-20.8s11.01-9.79,18.03-9.55h69.27c7.02-.24,13.03,2.95,18.03,9.55,5,6.61,7.56,13.54,7.68,20.8l-1.07,35.71c-.12,2.62-1.55,3.93-4.28,3.93h-42.13c-3.1-.12-4.64-1.43-4.64-3.93l.36-7.14c.36-7.97-1.07-12.59-4.28-13.84s-6.43-1.25-9.64,0-4.64,5.86-4.28,13.84l.54,18.57h32.31c2.5,0,3.93,1.55,4.28,4.64v10.71c0,3.45-1.19,5.24-3.57,5.36h-32.31l.54,20.71c.83,2.86,2.5,4.64,5,5.36h4.64c2.5-.71,4.17-2.5,5-5.36l.36-11.07c0-2.5,1.54-3.81,4.64-3.93h40.71c3.33.12,5,1.43,5,3.93l-.71,25.35c-1.9,7.5-7.74,11.07-17.5,10.71h-78.91Z" })
   ] });
 }
-const Ie = 1, Oe = 1080 / 283.66;
+const Fe = 1, Ie = 1080 / 283.66;
 function xe({
   variant: r = "full",
   size: t = 32,
@@ -330,13 +370,13 @@ function xe({
       {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 1080 1080",
-        width: t * Ie,
+        width: t * Fe,
         height: t,
         className: a,
         style: c,
         "aria-label": h,
         role: "img",
-        children: /* @__PURE__ */ e(ge, { color: n, accentColor: i })
+        children: /* @__PURE__ */ e(ue, { color: n, accentColor: i })
       }
     );
   if (r === "wordmark")
@@ -345,13 +385,13 @@ function xe({
       {
         xmlns: "http://www.w3.org/2000/svg",
         viewBox: "0 0 1080 283.66",
-        width: t * Oe,
+        width: t * Ie,
         height: t,
         className: a,
         style: c,
         "aria-label": h,
         role: "img",
-        children: /* @__PURE__ */ e(ye, { color: n })
+        children: /* @__PURE__ */ e(ge, { color: n })
       }
     );
   const p = 283.66 / 1080, w = 1080 * p + 36, C = w + 1080;
@@ -367,13 +407,13 @@ function xe({
       "aria-label": h,
       role: "img",
       children: [
-        /* @__PURE__ */ e("g", { transform: `scale(${p})`, children: /* @__PURE__ */ e(ge, { color: n, accentColor: i }) }),
-        /* @__PURE__ */ e("g", { transform: `translate(${w}, 0)`, children: /* @__PURE__ */ e(ye, { color: n }) })
+        /* @__PURE__ */ e("g", { transform: `scale(${p})`, children: /* @__PURE__ */ e(ue, { color: n, accentColor: i }) }),
+        /* @__PURE__ */ e("g", { transform: `translate(${w}, 0)`, children: /* @__PURE__ */ e(ge, { color: n }) })
       ]
     }
   );
 }
-const me = {
+const ye = {
   "new-haze": "🌙",
   "new-haze-light": "🌸",
   rabbitek: "🌑",
@@ -381,8 +421,8 @@ const me = {
   canahoria: "🌿",
   "canahoria-dark": "🍂"
 };
-function We() {
-  const { theme: r, themeName: t, setThemeName: n, themeOptions: i } = v(), [a, c] = m(!1), h = ee(null);
+function Le() {
+  const { theme: r, themeName: t, setThemeName: n, themeOptions: i } = v(), [a, c] = m(!1), h = X(null);
   return P(() => {
     if (!a) return;
     function p(y) {
@@ -404,7 +444,7 @@ function We() {
           fontSize: 14,
           lineHeight: 1
         },
-        children: me[t] ?? "🟣"
+        children: ye[t] ?? "🟣"
       }
     ),
     a && /* @__PURE__ */ e("div", { style: {
@@ -440,7 +480,7 @@ function We() {
           fontFamily: "inherit"
         },
         children: [
-          /* @__PURE__ */ e("span", { children: me[p.value] }),
+          /* @__PURE__ */ e("span", { children: ye[p.value] }),
           /* @__PURE__ */ e("span", { style: { flex: 1, textAlign: "left" }, children: p.label }),
           t === p.value && /* @__PURE__ */ e("span", { style: { color: r.accent }, children: "✓" })
         ]
@@ -458,7 +498,7 @@ function Ae(r = 768) {
     return i.addEventListener("change", a), () => i.removeEventListener("change", a);
   }, [r]), t;
 }
-const Le = [
+const Oe = [
   {
     label: "Dashboard",
     href: "https://admin.newhaze.ar",
@@ -470,18 +510,18 @@ const Le = [
     roles: ["growshop_owner", "growshop_employee", "distributor_owner", "distributor_employee"]
   }
 ];
-function je(r, t) {
+function We(r, t) {
   return t.some((n) => r.includes(n));
 }
-function Ze({ href: r, children: t, style: n, "aria-label": i }) {
+function je({ href: r, children: t, style: n, "aria-label": i }) {
   return /* @__PURE__ */ e("a", { href: r, style: n, "aria-label": i, children: t });
 }
-function He({ user: r, onLogout: t, profileHref: n, LinkComponent: i }) {
-  const { theme: a } = v(), [c, h] = m(!1), p = ee(null);
+function Ze({ user: r, onLogout: t, profileHref: n, LinkComponent: i }) {
+  const { theme: a } = v(), [c, h] = m(!1), p = X(null);
   return P(() => {
     if (!c) return;
-    const y = (b) => {
-      p.current && !p.current.contains(b.target) && h(!1);
+    const y = (x) => {
+      p.current && !p.current.contains(x.target) && h(!1);
     };
     return document.addEventListener("mousedown", y), () => document.removeEventListener("mousedown", y);
   }, [c]), /* @__PURE__ */ s("div", { ref: p, style: { position: "relative" }, children: [
@@ -560,12 +600,12 @@ function He({ user: r, onLogout: t, profileHref: n, LinkComponent: i }) {
             transition: "background 0.1s, color 0.1s"
           },
           onMouseEnter: (y) => {
-            const b = y.currentTarget;
-            b.style.background = a.s2, b.style.color = a.text;
+            const x = y.currentTarget;
+            x.style.background = a.s2, x.style.color = a.text;
           },
           onMouseLeave: (y) => {
-            const b = y.currentTarget;
-            b.style.background = "none", b.style.color = a.textMuted;
+            const x = y.currentTarget;
+            x.style.background = "none", x.style.color = a.textMuted;
           },
           children: "Cerrar sesión"
         }
@@ -573,18 +613,18 @@ function He({ user: r, onLogout: t, profileHref: n, LinkComponent: i }) {
     ] })
   ] });
 }
-function mt({
+function yt({
   activeApp: r,
   user: t,
   onLogin: n,
   onLogout: i,
   profileHref: a,
-  LinkComponent: c = Ze,
+  LinkComponent: c = je,
   websiteUrl: h = "https://newhaze.ar",
   learnUrl: p = "https://learn.newhaze.ar",
   extraNavLinks: y
 }) {
-  const { theme: b } = v(), w = Ae(), C = [
+  const { theme: x } = v(), w = Ae(), C = [
     { label: "Aprender", href: p, app: "learn" },
     { label: "Blog", href: `${h}/blog`, app: "blog" }
   ], l = (d) => ({
@@ -612,13 +652,13 @@ function mt({
     !w && /* @__PURE__ */ s("nav", { style: { display: "flex", gap: 20, alignItems: "center" }, children: [
       C.map((d) => /* @__PURE__ */ e(c, { href: d.href, style: l(r === d.app), children: d.label }, d.app)),
       y == null ? void 0 : y.map((d) => /* @__PURE__ */ e(c, { href: d.href, style: l(!1), children: d.label }, d.href)),
-      t && Le.map(
-        (d) => je(t.roles, d.roles) ? /* @__PURE__ */ e(c, { href: d.href, style: l(!1), children: d.label }, d.label) : null
+      t && Oe.map(
+        (d) => We(t.roles, d.roles) ? /* @__PURE__ */ e(c, { href: d.href, style: l(!1), children: d.label }, d.label) : null
       )
     ] }),
     /* @__PURE__ */ s("div", { style: { marginLeft: "auto", display: "flex", alignItems: "center", gap: 10 }, children: [
-      /* @__PURE__ */ e(We, {}),
-      t ? /* @__PURE__ */ e(He, { user: t, onLogout: i, profileHref: a, LinkComponent: c }) : /* @__PURE__ */ e(
+      /* @__PURE__ */ e(Le, {}),
+      t ? /* @__PURE__ */ e(Ze, { user: t, onLogout: i, profileHref: a, LinkComponent: c }) : /* @__PURE__ */ e(
         "button",
         {
           onClick: n,
@@ -638,7 +678,7 @@ function mt({
     ] })
   ] });
 }
-function Ue({ children: r }) {
+function He({ children: r }) {
   return /* @__PURE__ */ e("div", { style: {
     minHeight: "100vh",
     display: "flex",
@@ -647,7 +687,7 @@ function Ue({ children: r }) {
     padding: "24px 16px"
   }, children: r });
 }
-function O({ children: r, title: t, subtitle: n }) {
+function I({ children: r, title: t, subtitle: n }) {
   const { theme: i } = v();
   return /* @__PURE__ */ s("div", { style: {
     background: i.s1,
@@ -664,7 +704,7 @@ function O({ children: r, title: t, subtitle: n }) {
     r
   ] });
 }
-function Z({ msg: r }) {
+function j({ msg: r }) {
   const { theme: t } = v();
   return /* @__PURE__ */ e("div", { style: {
     background: t.errorBg,
@@ -675,7 +715,7 @@ function Z({ msg: r }) {
     color: t.error
   }, children: r });
 }
-function Ke({
+function Ue({
   onRegister: r,
   onVerifyOtp: t,
   onResendOtp: n,
@@ -685,65 +725,65 @@ function Ke({
   onSaveUsername: h,
   onGuest: p,
   initialMode: y = "login",
-  compact: b = !1,
+  compact: x = !1,
   googleClientId: w,
   appName: C = "New Haze"
 }) {
-  const { theme: l } = v(), [d, W] = m(y), [x, A] = m(""), [S, f] = m(""), [L, K] = m(["", "", "", "", "", ""]), [G, we] = m(""), [z, Y] = m(null), [k, te] = m(!1), [B, q] = m(0), [re, ve] = m(!1), $ = ee([]);
+  const { theme: l } = v(), [d, L] = m(y), [b, A] = m(""), [S, f] = m(""), [O, U] = m(["", "", "", "", "", ""]), [K, fe] = m(""), [z, G] = m(null), [k, Q] = m(!1), [B, Y] = m(0), [ee, we] = m(!1), N = X([]);
   P(() => {
     if (B <= 0) return;
-    const o = setTimeout(() => q((u) => u - 1), 1e3);
+    const o = setTimeout(() => Y((u) => u - 1), 1e3);
     return () => clearTimeout(o);
   }, [B]), P(() => {
     d === "otp" && setTimeout(() => {
       var o;
-      return (o = $.current[0]) == null ? void 0 : o.focus();
+      return (o = N.current[0]) == null ? void 0 : o.focus();
     }, 100), d === "profile" && setTimeout(() => {
       var o;
       return (o = document.getElementById("username-input")) == null ? void 0 : o.focus();
     }, 100);
   }, [d]);
   const E = (o) => {
-    W(o), Y(null);
+    L(o), G(null);
   }, T = async (o) => {
-    Y(null), te(!0);
+    G(null), Q(!0);
     try {
       await o();
     } catch (u) {
-      Y(u.message);
+      G(u.message);
     } finally {
-      te(!1);
+      Q(!1);
     }
-  }, ne = () => T(async () => {
-    if (!x || !S) throw new Error("Completá email y contraseña");
+  }, te = () => T(async () => {
+    if (!b || !S) throw new Error("Completá email y contraseña");
     if (S.length < 6) throw new Error("La contraseña debe tener al menos 6 caracteres");
-    await r(x, S), q(60), E("otp");
-  }), oe = () => T(async () => {
-    const o = L.join("");
+    await r(b, S), Y(60), E("otp");
+  }), re = () => T(async () => {
+    const o = O.join("");
     if (o.length < 6) throw new Error("Ingresá el código completo de 6 dígitos");
-    await t(x, o);
-  }), ke = () => T(async () => {
-    await n(x), q(60), K(["", "", "", "", "", ""]), setTimeout(() => {
+    await t(b, o);
+  }), ve = () => T(async () => {
+    await n(b), Y(60), U(["", "", "", "", "", ""]), setTimeout(() => {
       var o;
-      return (o = $.current[0]) == null ? void 0 : o.focus();
+      return (o = N.current[0]) == null ? void 0 : o.focus();
     }, 50);
+  }), ne = () => T(async () => {
+    if (!b || !S) throw new Error("Completá email y contraseña");
+    await i(b, S);
+  }), oe = () => T(async () => {
+    if (!b) throw new Error("Ingresá tu email");
+    await c(b), E("forgot_sent");
   }), ie = () => T(async () => {
-    if (!x || !S) throw new Error("Completá email y contraseña");
-    await i(x, S);
-  }), ae = () => T(async () => {
-    if (!x) throw new Error("Ingresá tu email");
-    await c(x), E("forgot_sent");
-  }), se = () => T(async () => {
-    if (!G.trim()) throw new Error("Ingresá un nombre de usuario");
-    await h(G.trim());
-  }), Ce = (o, u) => {
-    var I;
-    const g = u.replace(/\D/g, "").slice(-1), M = [...L];
-    M[o] = g, K(M), g && o < 5 && ((I = $.current[o + 1]) == null || I.focus());
-  }, Se = (o, u) => {
+    if (!K.trim()) throw new Error("Ingresá un nombre de usuario");
+    await h(K.trim());
+  }), ke = (o, u) => {
+    var F;
+    const g = u.replace(/\D/g, "").slice(-1), M = [...O];
+    M[o] = g, U(M), g && o < 5 && ((F = N.current[o + 1]) == null || F.focus());
+  }, Ce = (o, u) => {
     var g;
-    u.key === "Backspace" && !L[o] && o > 0 && ((g = $.current[o - 1]) == null || g.focus()), u.key === "Enter" && oe();
-  }, V = Pe(async (o) => {
+    u.key === "Backspace" && !O[o] && o > 0 && ((g = N.current[o - 1]) == null || g.focus()), u.key === "Enter" && re();
+  }, q = Me(async (o) => {
     !(o != null && o.credential) || !a || await T(async () => {
       await a(o.credential);
     });
@@ -752,26 +792,26 @@ function Ke({
     var u, g;
     if (!a || !w) return;
     if ((g = (u = window.google) == null ? void 0 : u.accounts) != null && g.id) {
-      window.google.accounts.id.initialize({ client_id: w, callback: V });
+      window.google.accounts.id.initialize({ client_id: w, callback: q });
       return;
     }
     const o = document.createElement("script");
     o.src = "https://accounts.google.com/gsi/client", o.async = !0, o.defer = !0, o.onload = () => {
-      var M, I, ce;
-      (ce = (I = (M = window.google) == null ? void 0 : M.accounts) == null ? void 0 : I.id) == null || ce.initialize({ client_id: w, callback: V });
+      var M, F, se;
+      (se = (F = (M = window.google) == null ? void 0 : M.accounts) == null ? void 0 : F.id) == null || se.initialize({ client_id: w, callback: q });
     }, document.head.appendChild(o);
-  }, [V, a, w]);
-  const _e = () => {
+  }, [q, a, w]);
+  const Se = () => {
     var o, u, g;
     (g = (u = (o = window.google) == null ? void 0 : o.accounts) == null ? void 0 : u.id) == null || g.prompt();
-  }, ze = (o) => {
+  }, _e = (o) => {
     var M;
     const u = o.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
     if (!u) return;
     o.preventDefault();
     const g = u.split("").concat(Array(6).fill("")).slice(0, 6);
-    K(g), (M = $.current[Math.min(u.length, 5)]) == null || M.focus();
-  }, j = {
+    U(g), (M = N.current[Math.min(u.length, 5)]) == null || M.focus();
+  }, W = {
     width: "100%",
     background: l.s2,
     border: `1px solid ${l.border}`,
@@ -794,29 +834,29 @@ function Ke({
     fontSize: 15,
     opacity: k ? 0.7 : 1,
     fontFamily: "inherit"
-  }, J = {
+  }, V = {
     ...D,
     opacity: 1,
     background: "transparent",
     border: `1px solid ${l.border}`,
     color: l.textMuted
-  }, le = /* @__PURE__ */ s(F, { children: [
-    d === "otp" && /* @__PURE__ */ s(O, { title: "Revisá tu email", subtitle: /* @__PURE__ */ s(F, { children: [
+  }, ae = /* @__PURE__ */ s($, { children: [
+    d === "otp" && /* @__PURE__ */ s(I, { title: "Revisá tu email", subtitle: /* @__PURE__ */ s($, { children: [
       "Enviamos un código de 6 dígitos a ",
-      /* @__PURE__ */ e("strong", { style: { color: l.accentBright }, children: x })
+      /* @__PURE__ */ e("strong", { style: { color: l.accentBright }, children: b })
     ] }), children: [
-      /* @__PURE__ */ e("div", { style: { display: "flex", gap: 8, justifyContent: "center", margin: "24px 0" }, onPaste: ze, children: L.map((o, u) => /* @__PURE__ */ e(
+      /* @__PURE__ */ e("div", { style: { display: "flex", gap: 8, justifyContent: "center", margin: "24px 0" }, onPaste: _e, children: O.map((o, u) => /* @__PURE__ */ e(
         "input",
         {
           ref: (g) => {
-            $.current[u] = g;
+            N.current[u] = g;
           },
           type: "text",
           inputMode: "numeric",
           maxLength: 1,
           value: o,
-          onChange: (g) => Ce(u, g.target.value),
-          onKeyDown: (g) => Se(u, g),
+          onChange: (g) => ke(u, g.target.value),
+          onKeyDown: (g) => Ce(u, g),
           style: {
             width: 44,
             height: 54,
@@ -840,14 +880,14 @@ function Ke({
         },
         u
       )) }),
-      z && /* @__PURE__ */ e(Z, { msg: z }),
+      z && /* @__PURE__ */ e(j, { msg: z }),
       /* @__PURE__ */ s("div", { style: { display: "flex", flexDirection: "column", gap: 10, marginTop: 4 }, children: [
-        /* @__PURE__ */ e("button", { style: D, onClick: oe, disabled: k, children: k ? "Verificando..." : "Confirmar código" }),
+        /* @__PURE__ */ e("button", { style: D, onClick: re, disabled: k, children: k ? "Verificando..." : "Confirmar código" }),
         /* @__PURE__ */ e(
           "button",
           {
-            style: { ...J, opacity: B > 0 ? 0.45 : 1, cursor: B > 0 ? "default" : "pointer" },
-            onClick: B > 0 ? void 0 : ke,
+            style: { ...V, opacity: B > 0 ? 0.45 : 1, cursor: B > 0 ? "default" : "pointer" },
+            onClick: B > 0 ? void 0 : ve,
             disabled: B > 0 || k,
             children: B > 0 ? `Reenviar en ${B}s` : "Reenviar código"
           }
@@ -862,62 +902,62 @@ function Ke({
         }
       ) })
     ] }),
-    d === "profile" && /* @__PURE__ */ e(O, { title: "¿Cómo querés que te llamen?", subtitle: "Podés cambiarlo después desde tu perfil", children: /* @__PURE__ */ s("div", { style: { display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }, children: [
+    d === "profile" && /* @__PURE__ */ e(I, { title: "¿Cómo querés que te llamen?", subtitle: "Podés cambiarlo después desde tu perfil", children: /* @__PURE__ */ s("div", { style: { display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }, children: [
       /* @__PURE__ */ e(
         "input",
         {
           id: "username-input",
-          value: G,
-          onChange: (o) => we(o.target.value),
+          value: K,
+          onChange: (o) => fe(o.target.value),
           placeholder: "ej: cultivador420",
-          style: j,
+          style: W,
           onFocus: (o) => {
             o.target.style.borderColor = l.accent;
           },
           onBlur: (o) => {
             o.target.style.borderColor = l.border;
           },
-          onKeyDown: (o) => o.key === "Enter" && se()
+          onKeyDown: (o) => o.key === "Enter" && ie()
         }
       ),
-      z && /* @__PURE__ */ e(Z, { msg: z }),
-      /* @__PURE__ */ e("button", { style: D, onClick: se, disabled: k, children: k ? "Guardando..." : "Empezar →" })
+      z && /* @__PURE__ */ e(j, { msg: z }),
+      /* @__PURE__ */ e("button", { style: D, onClick: ie, disabled: k, children: k ? "Guardando..." : "Empezar →" })
     ] }) }),
     d === "forgot_sent" && /* @__PURE__ */ e(
-      O,
+      I,
       {
         title: "Revisá tu casilla",
-        subtitle: /* @__PURE__ */ s(F, { children: [
+        subtitle: /* @__PURE__ */ s($, { children: [
           "Si existe una cuenta con ",
-          /* @__PURE__ */ e("strong", { style: { color: l.accentBright }, children: x }),
+          /* @__PURE__ */ e("strong", { style: { color: l.accentBright }, children: b }),
           ", vas a recibir un link para restablecer tu contraseña."
         ] }),
         children: /* @__PURE__ */ e("button", { style: { ...D, marginTop: 20 }, onClick: () => E("login"), children: "Volver al inicio de sesión" })
       }
     ),
-    d === "forgot" && /* @__PURE__ */ e(O, { title: "Restablecer contraseña", subtitle: "Ingresá tu email y te enviamos un link", children: /* @__PURE__ */ s("div", { style: { display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }, children: [
+    d === "forgot" && /* @__PURE__ */ e(I, { title: "Restablecer contraseña", subtitle: "Ingresá tu email y te enviamos un link", children: /* @__PURE__ */ s("div", { style: { display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }, children: [
       /* @__PURE__ */ e(
         "input",
         {
           type: "email",
-          value: x,
+          value: b,
           onChange: (o) => A(o.target.value),
           placeholder: "tu@email.com",
-          style: j,
+          style: W,
           onFocus: (o) => {
             o.target.style.borderColor = l.accent;
           },
           onBlur: (o) => {
             o.target.style.borderColor = l.border;
           },
-          onKeyDown: (o) => o.key === "Enter" && ae()
+          onKeyDown: (o) => o.key === "Enter" && oe()
         }
       ),
-      z && /* @__PURE__ */ e(Z, { msg: z }),
-      /* @__PURE__ */ e("button", { style: D, onClick: ae, disabled: k, children: k ? "Enviando..." : "Enviar link →" }),
-      /* @__PURE__ */ e("button", { style: J, onClick: () => E("login"), children: "← Volver" })
+      z && /* @__PURE__ */ e(j, { msg: z }),
+      /* @__PURE__ */ e("button", { style: D, onClick: oe, disabled: k, children: k ? "Enviando..." : "Enviar link →" }),
+      /* @__PURE__ */ e("button", { style: V, onClick: () => E("login"), children: "← Volver" })
     ] }) }),
-    (d === "login" || d === "register") && /* @__PURE__ */ s(O, { children: [
+    (d === "login" || d === "register") && /* @__PURE__ */ s(I, { children: [
       /* @__PURE__ */ s("div", { style: { textAlign: "center", marginBottom: 28 }, children: [
         /* @__PURE__ */ e("div", { style: { display: "flex", justifyContent: "center", marginBottom: 14 }, children: /* @__PURE__ */ e(xe, { variant: "icon", size: 56, color: "#fff", accentColor: l.accent }) }),
         /* @__PURE__ */ e("div", { style: { fontSize: 13, color: l.textMuted }, children: d === "login" ? "Bienvenido de vuelta" : "Creá tu cuenta para empezar" })
@@ -927,10 +967,10 @@ function Ke({
           "input",
           {
             type: "email",
-            value: x,
+            value: b,
             onChange: (o) => A(o.target.value),
             placeholder: "Email",
-            style: j,
+            style: W,
             onFocus: (o) => {
               o.target.style.borderColor = l.accent;
             },
@@ -943,25 +983,25 @@ function Ke({
           /* @__PURE__ */ e(
             "input",
             {
-              type: re ? "text" : "password",
+              type: ee ? "text" : "password",
               value: S,
               onChange: (o) => f(o.target.value),
               placeholder: "Contraseña",
-              style: { ...j, paddingRight: 42 },
+              style: { ...W, paddingRight: 42 },
               onFocus: (o) => {
                 o.target.style.borderColor = l.accent;
               },
               onBlur: (o) => {
                 o.target.style.borderColor = l.border;
               },
-              onKeyDown: (o) => o.key === "Enter" && (d === "login" ? ie() : ne())
+              onKeyDown: (o) => o.key === "Enter" && (d === "login" ? ne() : te())
             }
           ),
           /* @__PURE__ */ e(
             "button",
             {
               type: "button",
-              onClick: () => ve((o) => !o),
+              onClick: () => we((o) => !o),
               style: {
                 position: "absolute",
                 right: 12,
@@ -975,7 +1015,7 @@ function Ke({
                 display: "flex",
                 alignItems: "center"
               },
-              children: re ? /* @__PURE__ */ s("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: [
+              children: ee ? /* @__PURE__ */ s("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", children: [
                 /* @__PURE__ */ e("path", { d: "M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" }),
                 /* @__PURE__ */ e("path", { d: "M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" }),
                 /* @__PURE__ */ e("line", { x1: "1", y1: "1", x2: "23", y2: "23" })
@@ -986,15 +1026,15 @@ function Ke({
             }
           )
         ] }),
-        z && /* @__PURE__ */ e(Z, { msg: z }),
-        /* @__PURE__ */ e("button", { style: D, onClick: d === "login" ? ie : ne, disabled: k, children: k ? "..." : d === "login" ? "Entrar" : "Crear cuenta" }),
-        a && w && /* @__PURE__ */ s(F, { children: [
+        z && /* @__PURE__ */ e(j, { msg: z }),
+        /* @__PURE__ */ e("button", { style: D, onClick: d === "login" ? ne : te, disabled: k, children: k ? "..." : d === "login" ? "Entrar" : "Crear cuenta" }),
+        a && w && /* @__PURE__ */ s($, { children: [
           /* @__PURE__ */ s("div", { style: { display: "flex", alignItems: "center", gap: 12, margin: "4px 0" }, children: [
             /* @__PURE__ */ e("div", { style: { flex: 1, height: 1, background: l.border } }),
             /* @__PURE__ */ e("span", { style: { fontSize: 11, color: l.textDim, fontFamily: "inherit" }, children: "o" }),
             /* @__PURE__ */ e("div", { style: { flex: 1, height: 1, background: l.border } })
           ] }),
-          /* @__PURE__ */ e("button", { style: J, onClick: _e, disabled: k, children: "Continuar con Google" })
+          /* @__PURE__ */ e("button", { style: V, onClick: Se, disabled: k, children: "Continuar con Google" })
         ] }),
         d === "login" && /* @__PURE__ */ e(
           "button",
@@ -1036,9 +1076,9 @@ function Ke({
       ] })
     ] })
   ] });
-  return b ? le : /* @__PURE__ */ e(Ue, { children: le });
+  return x ? ae : /* @__PURE__ */ e(He, { children: ae });
 }
-function bt({ onClose: r, initialMode: t, authScreenProps: n }) {
+function mt({ onClose: r, initialMode: t, authScreenProps: n }) {
   const { theme: i } = v();
   return /* @__PURE__ */ e(
     "div",
@@ -1092,7 +1132,7 @@ function bt({ onClose: r, initialMode: t, authScreenProps: n }) {
               }
             ),
             /* @__PURE__ */ e(
-              Ke,
+              Ue,
               {
                 ...n,
                 compact: !0,
@@ -1106,20 +1146,20 @@ function bt({ onClose: r, initialMode: t, authScreenProps: n }) {
   );
 }
 function xt({ user: r, onUpdateUsername: t, onLogout: n }) {
-  const { theme: i } = v(), [a, c] = m(r.username ?? ""), [h, p] = m(!1), [y, b] = m(null), [w, C] = m(!1), [l, d] = m(!1), W = async () => {
+  const { theme: i } = v(), [a, c] = m(r.username ?? ""), [h, p] = m(!1), [y, x] = m(null), [w, C] = m(!1), [l, d] = m(!1), L = async () => {
     if (!a.trim()) {
-      b("Ingresá un nombre de usuario");
+      x("Ingresá un nombre de usuario");
       return;
     }
-    b(null), p(!0), C(!1);
+    x(null), p(!0), C(!1);
     try {
       await t(a.trim()), C(!0), setTimeout(() => C(!1), 2e3);
     } catch (f) {
-      b(f.message);
+      x(f.message);
     } finally {
       p(!1);
     }
-  }, x = {
+  }, b = {
     flex: 1,
     background: i.s2,
     border: `1px solid ${i.border}`,
@@ -1207,20 +1247,20 @@ function xt({ user: r, onUpdateUsername: t, onLogout: n }) {
           {
             value: a,
             onChange: (f) => {
-              c(f.target.value), b(null), C(!1);
+              c(f.target.value), x(null), C(!1);
             },
             placeholder: "nuevo_nombre",
-            style: x,
+            style: b,
             onFocus: (f) => {
               f.target.style.borderColor = i.accent;
             },
             onBlur: (f) => {
               f.target.style.borderColor = i.border;
             },
-            onKeyDown: (f) => f.key === "Enter" && W()
+            onKeyDown: (f) => f.key === "Enter" && L()
           }
         ),
-        /* @__PURE__ */ e("button", { style: A, onClick: W, disabled: h, children: h ? "..." : w ? "✓ Guardado" : "Guardar" })
+        /* @__PURE__ */ e("button", { style: A, onClick: L, disabled: h, children: h ? "..." : w ? "✓ Guardado" : "Guardar" })
       ] }),
       y && /* @__PURE__ */ e("div", { style: { marginTop: 8, fontSize: 12, color: i.error }, children: y })
     ] }),
@@ -1249,7 +1289,7 @@ function xt({ user: r, onUpdateUsername: t, onLogout: n }) {
     ) })
   ] });
 }
-function fe({ children: r, active: t = !1, onClick: n, style: i, className: a }) {
+function be({ children: r, active: t = !1, onClick: n, style: i, className: a }) {
   const { theme: c } = v();
   return /* @__PURE__ */ e(
     "div",
@@ -1270,7 +1310,7 @@ function fe({ children: r, active: t = !1, onClick: n, style: i, className: a })
     }
   );
 }
-function ft({ children: r, style: t, className: n }) {
+function bt({ children: r, style: t, className: n }) {
   const { theme: i } = v();
   return /* @__PURE__ */ e(
     "div",
@@ -1287,7 +1327,7 @@ function ft({ children: r, style: t, className: n }) {
     }
   );
 }
-function wt({ href: r, children: t }) {
+function ft({ href: r, children: t }) {
   return /* @__PURE__ */ e(
     "a",
     {
@@ -1306,18 +1346,18 @@ function wt({ href: r, children: t }) {
     }
   );
 }
-const Ge = "_wrapper_1ej2d_1", Ye = "_imageWrapper_1ej2d_19", qe = "_image_1ej2d_19", Ve = "_body_1ej2d_51", Je = "_title_1ej2d_67", Xe = "_description_1ej2d_77", Qe = "_price_1ej2d_87", R = {
-  wrapper: Ge,
-  imageWrapper: Ye,
-  image: qe,
-  body: Ve,
-  title: Je,
-  description: Xe,
-  price: Qe
+const Ke = "_wrapper_1ej2d_1", Ge = "_imageWrapper_1ej2d_19", Ye = "_image_1ej2d_19", qe = "_body_1ej2d_51", Ve = "_title_1ej2d_67", Je = "_description_1ej2d_77", Xe = "_price_1ej2d_87", R = {
+  wrapper: Ke,
+  imageWrapper: Ge,
+  image: Ye,
+  body: qe,
+  title: Ve,
+  description: Je,
+  price: Xe
 };
-function vt({ image: r, imageAlt: t, title: n, description: i, price: a }) {
+function wt({ image: r, imageAlt: t, title: n, description: i, price: a }) {
   const { theme: c } = v();
-  return /* @__PURE__ */ e("div", { className: R.wrapper, children: /* @__PURE__ */ s(fe, { style: { padding: 0, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }, children: [
+  return /* @__PURE__ */ e("div", { className: R.wrapper, children: /* @__PURE__ */ s(be, { style: { padding: 0, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }, children: [
     /* @__PURE__ */ e("div", { className: R.imageWrapper, children: /* @__PURE__ */ e("img", { src: r, alt: t ?? n, className: R.image }) }),
     /* @__PURE__ */ s("div", { className: R.body, children: [
       /* @__PURE__ */ e("h3", { className: R.title, style: { color: c.text }, children: n }),
@@ -1326,18 +1366,18 @@ function vt({ image: r, imageAlt: t, title: n, description: i, price: a }) {
     ] })
   ] }) });
 }
-const et = "_card_16ig2_1", tt = "_imageWrapper_16ig2_33", rt = "_image_16ig2_33", nt = "_imageOverlay_16ig2_67", ot = "_body_16ig2_81", it = "_title_16ig2_89", at = "_excerpt_16ig2_105", st = "_readMore_16ig2_119", lt = "_arrow_16ig2_135", _ = {
-  card: et,
-  imageWrapper: tt,
-  image: rt,
-  imageOverlay: nt,
-  body: ot,
-  title: it,
-  excerpt: at,
-  readMore: st,
-  arrow: lt
+const Qe = "_card_16ig2_1", et = "_imageWrapper_16ig2_33", tt = "_image_16ig2_33", rt = "_imageOverlay_16ig2_67", nt = "_body_16ig2_81", ot = "_title_16ig2_89", it = "_excerpt_16ig2_105", at = "_readMore_16ig2_119", st = "_arrow_16ig2_135", _ = {
+  card: Qe,
+  imageWrapper: et,
+  image: tt,
+  imageOverlay: rt,
+  body: nt,
+  title: ot,
+  excerpt: it,
+  readMore: at,
+  arrow: st
 };
-function kt({
+function vt({
   title: r,
   excerpt: t,
   coverImage: n,
@@ -1387,34 +1427,36 @@ function kt({
     }
   );
 }
-const ct = "_card_eodbe_1", dt = "_iconCircle_eodbe_21", ht = "_title_eodbe_41", pt = "_description_eodbe_55", H = {
-  card: ct,
-  iconCircle: dt,
-  title: ht,
-  description: pt
+const lt = "_card_eodbe_1", ct = "_iconCircle_eodbe_21", dt = "_title_eodbe_41", ht = "_description_eodbe_55", Z = {
+  card: lt,
+  iconCircle: ct,
+  title: dt,
+  description: ht
 };
-function Ct({ icon: r, title: t, description: n, iconVariant: i = "accent" }) {
+function kt({ icon: r, title: t, description: n, iconVariant: i = "accent" }) {
   const { theme: a } = v(), c = i === "accent-bright" ? a.accentBright : i === "secondary" ? a.secondary : i === "success" ? a.success : a.accent;
-  return /* @__PURE__ */ s(fe, { className: H.card, children: [
-    /* @__PURE__ */ e("div", { className: H.iconCircle, style: { background: c }, children: r }),
-    /* @__PURE__ */ e("h3", { className: H.title, style: { color: a.text }, children: t }),
-    /* @__PURE__ */ e("p", { className: H.description, style: { color: a.textMuted }, children: n })
+  return /* @__PURE__ */ s(be, { className: Z.card, children: [
+    /* @__PURE__ */ e("div", { className: Z.iconCircle, style: { background: c }, children: r }),
+    /* @__PURE__ */ e("h3", { className: Z.title, style: { color: a.text }, children: t }),
+    /* @__PURE__ */ e("p", { className: Z.description, style: { color: a.textMuted }, children: n })
   ] });
 }
 export {
-  bt as AuthModal,
-  Ke as AuthScreen,
-  wt as BetaBanner,
-  kt as BlogCard,
-  fe as Card,
-  ft as CardSection,
-  Ct as FeatureCard,
-  mt as Header,
+  mt as AuthModal,
+  Ue as AuthScreen,
+  ft as BetaBanner,
+  vt as BlogCard,
+  be as Card,
+  bt as CardSection,
+  kt as FeatureCard,
+  yt as Header,
+  Ee as LEGACY_THEME_MAP,
   xe as Logo,
-  vt as ProductCard,
-  yt as ThemeProvider,
+  wt as ProductCard,
+  Pe as THEME_HTML_CONFIG,
+  gt as ThemeProvider,
   xt as UserSettings,
   Te as resolveThemeName,
-  U as themes,
+  H as themes,
   v as useTheme
 };
