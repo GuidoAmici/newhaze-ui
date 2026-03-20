@@ -11,6 +11,8 @@ const THEME_ICONS: Record<ThemeName, string> = {
   'rabbitek-light':  '✨',
   'canahoria':       '🌿',
   'canahoria-dark':  '🍂',
+  'techno-violet':   '🟣',
+  'techno-green':    '🟢',
 }
 
 export function ThemePicker() {

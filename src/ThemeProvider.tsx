@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, useMemo } from 'react'
-import themes, { ThemeColors, ThemeName, resolveThemeName } from './themes'
+import themes, { ThemeColors, ThemeName, THEME_HTML_CONFIG, resolveThemeName } from './themes'
 
 const STORAGE_KEY = 'nh_theme'
 const DEFAULT_THEME: ThemeName = 'new-haze'
@@ -137,23 +137,6 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const HTML_CLASSES: Record<ThemeName, string[]> = {
-  'new-haze':        ['dark', 'new-haze'],
-  'new-haze-light':  ['new-haze'],
-  'rabbitek':        ['dark', 'rabbitek'],
-  'rabbitek-light':  ['rabbitek'],
-  'canahoria':       ['canahoria'],
-  'canahoria-dark':  ['dark', 'canahoria'],
-}
-
-const COLOR_SCHEME: Record<ThemeName, string> = {
-  'new-haze':        'dark',
-  'new-haze-light':  'light',
-  'rabbitek':        'dark',
-  'rabbitek-light':  'light',
-  'canahoria':       'light',
-  'canahoria-dark':  'dark',
-}
 
 function applyTheme(name: ThemeName, colors: ThemeColors) {
   const root = document.documentElement
@@ -216,9 +199,10 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   root.style.setProperty('--ring',                  colors.focus)
 
   // CSS classes (for Tailwind dark: variant)
-  root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'light')
-  HTML_CLASSES[name].forEach(c => root.classList.add(c))
-  root.style.colorScheme = COLOR_SCHEME[name]
+  const cfg = THEME_HTML_CONFIG[name]
+  root.classList.remove('dark', 'new-haze', 'rabbitek', 'canahoria', 'techno-violet', 'techno-green', 'light')
+  cfg.classes.forEach(c => root.classList.add(c))
+  root.style.colorScheme = cfg.colorScheme
 }
 
 // ── Provider ──────────────────────────────────────────────────────────────────

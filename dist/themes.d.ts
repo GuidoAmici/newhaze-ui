@@ -27,7 +27,7 @@ export interface Theme {
     label: string;
     colors: ThemeColors;
 }
-export type ThemeName = 'new-haze' | 'new-haze-light' | 'rabbitek' | 'rabbitek-light' | 'canahoria' | 'canahoria-dark';
+export type ThemeName = 'new-haze' | 'new-haze-light' | 'rabbitek' | 'rabbitek-light' | 'canahoria' | 'canahoria-dark' | 'techno-violet' | 'techno-green';
 /** HTML classes and color-scheme per theme — used by ThemeProvider and FOUC scripts */
 export declare const THEME_HTML_CONFIG: Record<ThemeName, {
     classes: string[];
