@@ -149,10 +149,6 @@ function applyTheme(name: ThemeName, colors: ThemeColors) {
   // Elevation shadows
   root.style.setProperty('--nh-shadow-sm', colors.shadowSm)
   root.style.setProperty('--nh-shadow-lg', colors.shadowLg)
-  // Backward-compat aliases (so existing CSS using --nh-bg-* still works)
-  root.style.setProperty('--nh-bg-dark',  colors.s0)
-  root.style.setProperty('--nh-bg',       colors.s1)
-  root.style.setProperty('--nh-bg-light', colors.s2)
   // Text
   root.style.setProperty('--nh-text',          colors.text)
   root.style.setProperty('--nh-text-muted',    colors.textMuted)
