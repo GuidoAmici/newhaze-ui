@@ -1,4 +1,6 @@
 export { ThemeProvider, useTheme } from './ThemeProvider';
+export { NH_VARS, FOUC_SCRIPT } from './tokens';
+export type { NhVar } from './tokens';
 export { Logo } from './Logo/Logo';
 export type { LogoProps } from './Logo/Logo';
 export { Header } from './Header/Header';

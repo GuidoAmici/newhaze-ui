@@ -5,14 +5,8 @@ import { useTheme } from '../ThemeProvider'
 import { ThemeName } from '../themes'
 
 const THEME_ICONS: Record<ThemeName, string> = {
-  'new-haze':        '🌙',
-  'new-haze-light':  '🌸',
-  'rabbitek':        '🌑',
-  'rabbitek-light':  '✨',
-  'canahoria':       '🌿',
-  'canahoria-dark':  '🍂',
-  'techno-violet':   '🟣',
-  'techno-green':    '🟢',
+  'new-haze':       '🌙',
+  'new-haze-light': '☀️',
 }
 
 export function ThemePicker() {
@@ -44,7 +38,7 @@ export function ThemePicker() {
           lineHeight: 1,
         }}
       >
-        {THEME_ICONS[themeName] ?? '🟣'}
+        {THEME_ICONS[themeName] ?? '🌙'}
       </button>
 
       {open && (
@@ -76,4 +70,3 @@ export function ThemePicker() {
     </div>
   )
 }
-

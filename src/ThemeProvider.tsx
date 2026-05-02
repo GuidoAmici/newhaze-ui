@@ -29,8 +29,8 @@ const STATIC_CSS = `
   --nh-space-24: 96px;
 
   /* ── Typography ───────────────────── */
-  --nh-font-sans: 'Inter', 'Geist', system-ui, -apple-system, sans-serif;
-  --nh-font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --nh-font-sans: 'Rubik', sans-serif;
+  --nh-font-mono: 'Roboto Mono', monospace;
 
   --nh-text-xs:   10px;
   --nh-text-sm:   12px;

@@ -27,13 +27,13 @@ export interface Theme {
     label: string;
     colors: ThemeColors;
 }
-export type ThemeName = 'new-haze' | 'new-haze-light' | 'rabbitek' | 'rabbitek-light' | 'canahoria' | 'canahoria-dark' | 'techno-violet' | 'techno-green';
+export type ThemeName = 'new-haze' | 'new-haze-light';
 /** HTML classes and color-scheme per theme — used by ThemeProvider and FOUC scripts */
 export declare const THEME_HTML_CONFIG: Record<ThemeName, {
     classes: string[];
     colorScheme: 'dark' | 'light';
 }>;
-/** Legacy names that may exist in localStorage */
+/** Legacy names that may exist in localStorage — all map to one of the 2 themes */
 export declare const LEGACY_THEME_MAP: Record<string, ThemeName>;
 export declare function resolveThemeName(stored: string | null): ThemeName;
 declare const themes: Record<ThemeName, Theme>;

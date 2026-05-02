@@ -25,7 +25,14 @@ export interface NavUser {
 }
 
 // Accept any link-like component: Next.js Link, React Router Link, or plain <a>
-type LinkProps = { href: string; children: React.ReactNode; style?: React.CSSProperties; 'aria-label'?: string }
+type LinkProps = {
+  href: string
+  children: React.ReactNode
+  style?: React.CSSProperties
+  'aria-label'?: string
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>
+}
 
 export interface HeaderProps {
   /** Which app this is rendered in — used to highlight the active nav item */
@@ -63,8 +70,8 @@ function hasAnyRole(userRoles: string[], required: string[]): boolean {
   return required.some(r => userRoles.includes(r))
 }
 
-function DefaultLink({ href, children, style, 'aria-label': ariaLabel }: LinkProps) {
-  return <a href={href} style={style} aria-label={ariaLabel}>{children}</a>
+function DefaultLink({ href, children, style, 'aria-label': ariaLabel, onMouseEnter, onMouseLeave }: LinkProps) {
+  return <a href={href} style={style} aria-label={ariaLabel} onMouseEnter={onMouseEnter as React.MouseEventHandler<HTMLAnchorElement>} onMouseLeave={onMouseLeave as React.MouseEventHandler<HTMLAnchorElement>}>{children}</a>
 }
 
 interface UserMenuProps {
@@ -203,16 +210,25 @@ export function Header({
 }: HeaderProps) {
   const { theme } = useTheme()
   const isMobile = useIsMobile()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const navLinks = [
-    { label: 'Aprender', href: learnUrl,          app: 'learn' },
-    { label: 'Blog',     href: `${websiteUrl}/blog`, app: 'blog'  },
+    { label: 'Productos', href: `${websiteUrl}/#productos`, app: 'website' },
+    { label: 'Learn',     href: learnUrl,                   app: 'learn'   },
+    { label: 'Blog',      href: `${websiteUrl}/blog`,       app: 'blog'    },
+    { label: 'Nosotros',  href: `${websiteUrl}/vision`,     app: 'vision'  },
   ]
 
   const navLinkStyle = (isActive: boolean): React.CSSProperties => ({
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: isActive ? 600 : 400,
-    color: isActive ? 'var(--nh-accent-bright)' : 'var(--nh-text-muted)',
+    color: isActive ? '#F0F0F2' : '#666670',
     textDecoration: 'none',
     cursor: 'pointer',
     transition: 'color 0.15s',
@@ -220,69 +236,97 @@ export function Header({
 
   return (
     <header style={{
-      borderBottom: '1px solid var(--nh-border)',
-      padding: isMobile ? '0 16px' : '0 32px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 24,
-      height: 56,
-      background: 'color-mix(in srgb, var(--nh-bg) 93%, transparent)',
-      backdropFilter: 'blur(10px)',
-      position: 'sticky',
+      position: 'fixed',
       top: 0,
+      left: 0,
+      right: 0,
       zIndex: 100,
+      height: 64,
+      background: scrolled ? 'rgba(14,14,18,0.92)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(16px)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : '1px solid transparent',
+      transition: 'background 0.3s, border-color 0.3s',
     }}>
+      <div style={{
+        maxWidth: 1280,
+        margin: '0 auto',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 24,
+        padding: isMobile ? '0 20px' : '0 40px',
+        boxSizing: 'border-box',
+      }}>
 
-      {/* Logo */}
-      <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <Logo variant="full" size={28} />
-      </LinkComponent>
+        {/* Logo */}
+        <LinkComponent href={websiteUrl} aria-label="New Haze" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <Logo variant="full" size={28} />
+        </LinkComponent>
 
-      {/* Nav — hidden on mobile */}
-      {!isMobile && (
-        <nav style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
-          {navLinks.map(link => (
-            <LinkComponent key={link.app} href={link.href} style={navLinkStyle(activeApp === link.app)}>
-              {link.label}
-            </LinkComponent>
-          ))}
-          {extraNavLinks?.map(link => (
-            <LinkComponent key={link.href} href={link.href} style={navLinkStyle(false)}>
-              {link.label}
-            </LinkComponent>
-          ))}
-          {user && ROLE_LINKS.map(link =>
-            hasAnyRole(user.roles, link.roles) ? (
-              <LinkComponent key={link.label} href={link.href} style={navLinkStyle(false)}>
+        {/* Nav — hidden on mobile */}
+        {!isMobile && (
+          <nav style={{ display: 'flex', gap: 36, alignItems: 'center' }}>
+            {navLinks.map(link => (
+              <LinkComponent
+                key={link.app}
+                href={link.href}
+                style={navLinkStyle(activeApp === link.app)}
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = '#F0F0F2' }}
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = activeApp === link.app ? '#F0F0F2' : '#666670' }}
+              >
                 {link.label}
               </LinkComponent>
-            ) : null
-          )}
-        </nav>
-      )}
-
-      {/* Right controls */}
-      <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-        <ThemePicker />
-        {user ? (
-          <UserMenu user={user} onLogout={onLogout} profileHref={profileHref} LinkComponent={LinkComponent} />
-        ) : (
-          <button
-            onClick={onLogin}
-            style={{
-              background: 'none',
-              border: '1px solid var(--nh-border)',
-              borderRadius: 8,
-              padding: '4px 10px',
-              color: 'var(--nh-accent-bright)',
-              cursor: 'pointer',
-              fontSize: 11,
-              fontFamily: 'inherit',
-            }}
-          >
-            Iniciar sesión
-          </button>
+            ))}
+            {extraNavLinks?.map(link => (
+              <LinkComponent
+                key={link.href}
+                href={link.href}
+                style={navLinkStyle(false)}
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = '#F0F0F2' }}
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { (e.currentTarget as HTMLElement).style.color = '#666670' }}
+              >
+                {link.label}
+              </LinkComponent>
+            ))}
+            {user && ROLE_LINKS.map(link =>
+              hasAnyRole(user.roles, link.roles) ? (
+                <LinkComponent key={link.label} href={link.href} style={navLinkStyle(false)}>
+                  {link.label}
+                </LinkComponent>
+              ) : null
+            )}
+          </nav>
         )}
+
+        {/* Right controls */}
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <ThemePicker />
+          {user ? (
+            <UserMenu user={user} onLogout={onLogout} profileHref={profileHref} LinkComponent={LinkComponent} />
+          ) : (
+            <button
+              onClick={onLogin}
+              style={{
+                background: '#855CF2',
+                border: 'none',
+                borderRadius: 8,
+                padding: '8px 20px',
+                color: '#fff',
+                cursor: 'pointer',
+                fontSize: 13,
+                fontFamily: 'inherit',
+                fontWeight: 500,
+                transition: 'background 0.15s',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#9b6fd4' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#855CF2' }}
+            >
+              Acceder
+            </button>
+          )}
+        </div>
       </div>
     </header>
   )

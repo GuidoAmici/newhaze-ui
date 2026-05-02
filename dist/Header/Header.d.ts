@@ -9,6 +9,8 @@ type LinkProps = {
     children: React.ReactNode;
     style?: React.CSSProperties;
     'aria-label'?: string;
+    onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+    onMouseLeave?: React.MouseEventHandler<HTMLElement>;
 };
 export interface HeaderProps {
     /** Which app this is rendered in — used to highlight the active nav item */
