@@ -1,6 +1,9 @@
 {
-  "name": "newhaze-ui",
+  "name": "@GuidoAmici/newhaze-ui",
   "version": "2.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "exports": {
     ".": {

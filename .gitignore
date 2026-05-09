@@ -1,3 +1,5 @@
 # Agent context files (OpenViking L0/L1 layers)
 **/**/
+!.github/
+!.github/**
 node_modules/
